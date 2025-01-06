@@ -2,7 +2,7 @@
   "name": "@my-resume-app/client",
   "version": "0.0.1",
   "private": true,
-  "proxy": "http://localhost:4200",
+  "proxy": "http://localhost:4000",
   "nx": {
     "name": "client",
     "projectType": "application",

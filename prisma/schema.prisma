@@ -13,6 +13,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+}
+
 model Question {
   id          Int      @id @default(autoincrement())
   title       String
@@ -40,4 +47,12 @@ model QuestionTag {
   tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@unique([questionId, tagId])
+}
+
+model JobTags {
+  id             Int      @id @default(autoincrement())
+  jobTitle       String
+  jobDescription String
+  extractedTags  Json
+  createdAt      DateTime @default(now())
 }

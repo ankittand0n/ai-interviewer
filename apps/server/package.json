@@ -2,6 +2,9 @@
   "name": "@my-resume-app/server",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+  "dev": "npx ts-node-dev --respawn --transpile-only src/main.ts"
+},
   "nx": {
     "name": "server",
     "projectType": "application",
