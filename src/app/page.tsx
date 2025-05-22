@@ -87,6 +87,6 @@ export default function Home() {
           </Form>
         </CardContent>
       </Card>
-    </main>
+      </main>
   )
 }

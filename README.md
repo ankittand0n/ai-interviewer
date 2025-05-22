@@ -83,3 +83,4 @@ The application can be deployed using:
 1. Docker (recommended)
 2. [Vercel Platform](https://vercel.com/new)
 3. Any platform supporting Node.js
+ 

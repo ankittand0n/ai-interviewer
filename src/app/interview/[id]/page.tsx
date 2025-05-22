@@ -307,28 +307,79 @@ export default function InterviewPage() {
       </Card>
 
       <Card className="mb-6">
+        <CardHeader>
+          <CardTitle className="flex justify-between items-center">
+            Technical Interview
+            {interview.status === 'completed' && interview.continuousScoring && (
+              <div className="flex items-center gap-4">
+                <div className={`text-lg font-semibold ${
+                  interview.continuousScoring.currentScore >= 80 ? 'text-green-500' :
+                  interview.continuousScoring.currentScore >= 60 ? 'text-yellow-500' :
+                  'text-red-500'
+                }`}>
+                  Final Score: {Math.round(interview.continuousScoring.currentScore)}/100
+                </div>
+                <div className="flex gap-2 text-sm">
+                  <span title="Technical Accuracy" className="text-blue-500">
+                    T: {Math.round(interview.continuousScoring.technicalAccuracy)}
+                  </span>
+                  <span title="Job Alignment" className="text-purple-500">
+                    J: {Math.round(interview.continuousScoring.jobAlignment)}
+                  </span>
+                  <span title="Communication" className="text-teal-500">
+                    C: {Math.round(interview.continuousScoring.communicationClarity)}
+                  </span>
+                  <span title="Topics Covered" className="text-orange-500 ml-2">
+                    Topics: {interview.continuousScoring.uniqueTopicsAsked}/5
+                  </span>
+                </div>
+              </div>
+            )}
+          </CardTitle>
+        </CardHeader>
         <CardContent className="p-4">
           <div className="h-[400px] overflow-y-auto mb-4 space-y-4">
-            {interview.messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`p-3 rounded-lg ${
-                  msg.role === 'assistant'
-                    ? 'bg-primary/10 ml-4'
-                    : msg.role === 'user'
-                    ? 'bg-muted mr-4'
-                    : 'bg-secondary/10'
-                }`}
-              >
-                <p className="text-sm font-semibold mb-1">
-                  {msg.role === 'assistant' ? 'Interviewer' : msg.role === 'user' ? 'You' : 'System'}
-                </p>
-                <p className="whitespace-pre-wrap">{msg.content}</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {new Date(msg.timestamp).toLocaleTimeString()}
-                </p>
-              </div>
-            ))}
+            {interview.messages.map((msg, index) => {
+              const evaluation = interview.status === 'completed' ? 
+                interview.continuousScoring?.responses.find(r => r.messageIndex === index) : 
+                undefined;
+              return (
+                <div
+                  key={index}
+                  className={`p-3 rounded-lg ${
+                    msg.role === 'assistant'
+                      ? 'bg-primary/10 ml-4'
+                      : msg.role === 'user'
+                      ? 'bg-muted mr-4'
+                      : 'bg-secondary/10'
+                  }`}
+                >
+                  <div className="flex justify-between items-start mb-1">
+                    <p className="text-sm font-semibold">
+                      {msg.role === 'assistant' ? 'Interviewer' : msg.role === 'user' ? 'You' : 'System'}
+                    </p>
+                    {evaluation && (
+                      <span className={`text-sm font-medium ${
+                        evaluation.score >= 80 ? 'text-green-500' :
+                        evaluation.score >= 60 ? 'text-yellow-500' :
+                        'text-red-500'
+                      }`}>
+                        Score: {evaluation.score}
+                      </span>
+                    )}
+                  </div>
+                  <p className="whitespace-pre-wrap">{msg.content}</p>
+                  {evaluation && (
+                    <p className="text-sm text-muted-foreground mt-2 italic">
+                      {evaluation.feedback}
+                    </p>
+                  )}
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {new Date(msg.timestamp).toLocaleTimeString()}
+                  </p>
+                </div>
+              )
+            })}
             <div ref={chatEndRef} />
           </div>
 

@@ -230,7 +230,7 @@
       "id": "6fb9b650-e82e-48f5-9774-e2070841620a",
       "candidateId": "00e3e2e3-8b8e-4370-9651-145361eb0e8a",
       "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
-      "status": "in_progress",
+      "status": "completed",
       "messages": [
         {
           "role": "system",
@@ -246,9 +246,199 @@
           "role": "assistant",
           "content": "Hello, Johnathan. Thank you for joining us today. Let's dive right into the interview. From your impressive background, it seems like you've had significant experience with both Agile and Waterfall methodologies. Could you provide an example of a project where you had to decide between using Agile or Waterfall? What factors did you consider in making that decision?",
           "timestamp": "2025-05-22T11:37:11.632Z"
+        },
+        {
+          "role": "user",
+          "content": "in agile method is cheaper to fallback and revert changes whereas in in waterfall the changes are harder to revert",
+          "timestamp": "2025-05-22T13:36:51.366Z"
         }
       ],
-      "createdAt": "2025-05-22T11:37:04.259Z"
+      "createdAt": "2025-05-22T11:37:04.259Z",
+      "elapsedTime": 107331,
+      "continuousScoring": {
+        "currentScore": 38,
+        "technicalAccuracy": 30,
+        "jobAlignment": 40,
+        "communicationClarity": 50,
+        "responses": [
+          {
+            "messageIndex": 3,
+            "score": 38,
+            "feedback": "The response provides a basic and somewhat accurate comparison between Agile and Waterfall methodologies in terms of the ease of making changes. However, it lacks depth and specific examples, which would be expected from a project manager with experience in both methodologies. For better alignment with the job, the candidate should elaborate on factors considered when choosing a methodology, such as project scope, timeline, stakeholder requirements, and team expertise. Additionally, communication could be improved by providing a clearer, more structured explanation. Continue the interview to assess further competencies."
+          }
+        ]
+      },
+      "score": 38,
+      "feedback": "Interview ended early with final score: 38/100\n\nTechnical Accuracy: 30/100\nJob Alignment: 40/100\nCommunication Clarity: 50/100\n\nDetailed Feedback:\nThe response provides a basic and somewhat accurate comparison between Agile and Waterfall methodologies in terms of the ease of making changes. However, it lacks depth and specific examples, which would be expected from a project manager with experience in both methodologies. For better alignment with the job, the candidate should elaborate on factors considered when choosing a methodology, such as project scope, timeline, stakeholder requirements, and team expertise. Additionally, communication could be improved by providing a clearer, more structured explanation. Continue the interview to assess further competencies."
+    },
+    {
+      "id": "37f1925c-04fc-4c6b-b2f8-f6ca7ca550eb",
+      "candidateId": "dfb2a888-c5f7-42d6-a48f-c65807cb8965",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "in_progress",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Interview started. The AI interviewer will now begin the assessment.",
+          "timestamp": "2025-05-22T13:43:33.001Z"
+        }
+      ],
+      "createdAt": "2025-05-22T13:43:33.001Z"
+    },
+    {
+      "id": "1ad47001-667c-452a-9fde-29f83c8dc5c2",
+      "candidateId": "dfb2a888-c5f7-42d6-a48f-c65807cb8965",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "completed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Interview started. The AI interviewer will now begin the assessment.",
+          "timestamp": "2025-05-22T13:43:34.182Z"
+        },
+        {
+          "role": "user",
+          "content": "hi",
+          "timestamp": "2025-05-22T13:43:41.249Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello, Johnathan. Thank you for joining us today. Let's dive right in. Could you please elaborate on how you've applied Agile methodologies in your previous projects and the impact it had on project delivery?",
+          "timestamp": "2025-05-22T13:43:46.056Z"
+        },
+        {
+          "role": "user",
+          "content": "i used agile is a tech project where we have 3 months sprint ",
+          "timestamp": "2025-05-22T14:04:02.731Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Thank you for sharing that. Could you expand a bit more on that experience? Specifically, I'm interested in understanding how you structured those three-month sprints and the challenges you faced during implementation. How did you ensure that the Agile practices were effectively adopted by the team, and what metrics did you use to measure the success of the Agile transformation?",
+          "timestamp": "2025-05-22T14:04:08.556Z"
+        },
+        {
+          "role": "user",
+          "content": "we measured the success by analysing the nnumber of jira tickets delivered and what story points were delivered",
+          "timestamp": "2025-05-22T14:04:57.467Z"
+        },
+        {
+          "role": "assistant",
+          "content": "That's a solid approach, as tracking Jira tickets and story points can provide a clear picture of team productivity and project progress. Beyond these metrics, how did you manage and address any challenges related to team dynamics or stakeholder expectations during the Agile transformation? Additionally, what role did you play in facilitating Agile ceremonies, such as sprint planning and retrospectives?",
+          "timestamp": "2025-05-22T14:05:02.758Z"
+        }
+      ],
+      "createdAt": "2025-05-22T13:43:34.182Z",
+      "elapsedTime": 78898,
+      "continuousScoring": {
+        "currentScore": 22,
+        "technicalAccuracy": 20,
+        "jobAlignment": 23.333333333333332,
+        "communicationClarity": 23.333333333333332,
+        "responses": [
+          {
+            "messageIndex": 1,
+            "score": 0,
+            "feedback": "The candidate has only exchanged greetings so far. More information is needed to evaluate their technical knowledge, alignment with the job, and communication skills. Please proceed with asking relevant questions related to the Project Manager role."
+          },
+          {
+            "messageIndex": 3,
+            "score": 20,
+            "feedback": "The candidate's response lacks technical depth and clarity regarding the application of Agile methodologies. It does not align well with the job requirements, which demand a strong understanding and experience with formal project management methodologies. The communication is also unclear and lacks professionalism. Ending the interview early is recommended."
+          },
+          {
+            "messageIndex": 5,
+            "score": 46,
+            "feedback": "The candidate provided a basic response regarding measuring Agile success using Jira tickets and story points, which is relevant but lacks depth. They did not elaborate on structuring sprints, challenges faced, or how Agile practices were adopted. More detailed examples and a broader understanding of Agile methodologies are needed to demonstrate alignment with the Project Manager role. Additionally, attention to communication clarity and professionalism, including grammar and detail, is necessary. Encourage more comprehensive responses."
+          }
+        ],
+        "uniqueTopicsAsked": 2
+      },
+      "score": 18,
+      "feedback": "Interview ended prematurely.\n\nFinal Score: 18/100\nQuestions Answered: 3/5 minimum required\n\nNote: Score was significantly reduced due to incomplete interview process."
+    },
+    {
+      "id": "3a448f4d-dc1c-422c-a40a-0c3e41617005",
+      "candidateId": "ed85ed7e-4d78-49a9-aeeb-dd4c16c8ec49",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "completed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Welcome to your technical interview for the Project Manager position. I'll be your AI interviewer today.\n\nI'll be asking you questions about your technical experience and knowledge related to this role. Please:\n- Take your time to provide detailed answers\n- Feel free to ask for clarification if needed\n- Share specific examples from your experience\n- Be honest if you're not familiar with a topic\n\nLet's begin with your first question: Could you tell me about your relevant experience and what interests you about this Project Manager position?",
+          "timestamp": "2025-05-22T13:52:50.361Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! I'll be conducting your technical interview for the Project Manager position today. Let's start by having you tell me about your relevant experience and what interests you about this role.",
+          "timestamp": "2025-05-22T13:52:50.361Z"
+        }
+      ],
+      "createdAt": "2025-05-22T13:52:50.361Z",
+      "score": 75,
+      "feedback": "- Strengths Demonstrated: The candidate has a good understanding of formal project management methodologies such as Agile, Scrum, and Waterfall. They demonstrated proficiency in using project management software like MS Project and Trello, which are crucial for tracking and managing project timelines and deliverables. The candidate also showed strong communication skills, articulating their thoughts clearly and effectively.\n\n- Areas for Improvement: While the candidate has a solid grasp on project management tools and methodologies, they could improve their knowledge in industry-specific experience. There was limited discussion about their experience in budgeting, forecasting, and financial reporting, which are important aspects of managing project costs. Furthermore, the candidate could expand on their conflict resolution and change management experience, as these are critical skills for a project manager.\n\n- Technical Competency Assessment: The candidate possesses a good level of technical knowledge in project management and is familiar with various methodologies and tools. However, they should deepen their expertise in financial aspects of project management and gain more experience in handling industry-specific projects to enhance their overall technical competency.\n\n- Recommendations: To improve their fit for the role, the candidate should focus on gaining more experience in budgeting and financial reporting. They should also seek opportunities to manage projects in specific industries to broaden their practical experience. Additionally, obtaining a Project Management Professional (PMP) certification could strengthen their credentials and demonstrate their commitment to professional development in project management."
+    },
+    {
+      "id": "15d747b0-6dc3-4715-8efc-0740c1b11960",
+      "candidateId": "8a482c3c-d93f-4745-a8ef-8c14fe730c9b",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "completed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Welcome to your technical interview for the Project Manager position. I'll be your AI interviewer today.\n\nI'll be asking you questions about your technical experience and knowledge related to this role. Please:\n- Take your time to provide detailed answers\n- Feel free to ask for clarification if needed\n- Share specific examples from your experience\n- Be honest if you're not familiar with a topic",
+          "timestamp": "2025-05-22T13:58:12.591Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! I'll be conducting your technical interview for the Project Manager position today. Let's start by having you tell me about your relevant experience and what interests you about this role.",
+          "timestamp": "2025-05-22T13:58:12.591Z"
+        }
+      ],
+      "createdAt": "2025-05-22T13:58:12.591Z",
+      "score": 85,
+      "feedback": "Strengths Demonstrated:\n- The candidate displayed strong technical knowledge in project management methodologies such as Agile, Scrum, and Waterfall. They provided specific examples of projects they have managed using these methodologies, demonstrating their ability to adapt to different project environments.\n- They showcased excellent problem-solving skills by describing a complex project they led where they successfully identified and mitigated significant risks, ensuring project delivery within scope and budget.\n- Communication skills were highlighted through clear and concise explanations of past project experiences and how they effectively coordinated with team members and stakeholders.\n- The candidate showed a good overall fit for the role by aligning their experience with the job requirements and expressing a strong interest in furthering their career in project management within the company's industry.\n\nAreas for Improvement:\n- While the candidate demonstrated a solid understanding of project management software, they could further enhance their expertise by gaining deeper proficiency in advanced features of tools like MS Project or Jira.\n- Although they have experience in managing project scope, schedule, and costs, they could benefit from additional training in advanced financial reporting and budgeting techniques to strengthen their ability to manage larger and more complex projects.\n- Their conflict resolution skills, while adequate, could be sharpened with more experience or training in this specific area to handle challenging team dynamics more effectively.\n\nTechnical Competency Assessment:\n- The candidate possesses a robust foundation in formal project management methodologies and has practical experience applying these in real-world scenarios.\n- They seem proficient in using project management software but could improve by exploring more advanced functionalities to optimize project tracking and reporting.\n- Their understanding of resource management, risk identification, and mitigation strategies is commendable and aligns well with the role's requirements.\n\nRecommendations:\n- Encourage the candidate to pursue further professional development in financial management and advanced project management software tools to enhance their technical skill set.\n- Suggest participation in workshops or training sessions focused on conflict resolution and change management to bolster their leadership capabilities.\n- Consider providing opportunities for the candidate to lead cross-functional projects or initiatives to broaden their experience and prepare them for more complex project challenges in the future."
+    },
+    {
+      "id": "3dc3d607-288e-464a-ba2e-b3182cb76d9b",
+      "candidateId": "15732f80-e5d3-4158-8395-0ed369ee6ab8",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "completed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Welcome to your technical interview for the Project Manager position. I'll be your AI interviewer today.\n\nI'll be asking you questions about your technical experience and knowledge related to this role. Please:\n- Take your time to provide detailed answers\n- Feel free to ask for clarification if needed\n- Share specific examples from your experience\n- Be honest if you're not familiar with a topic",
+          "timestamp": "2025-05-22T14:00:13.919Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! I'll be conducting your technical interview for the Project Manager position today. Let's start by having you tell me about your relevant experience and what interests you about this role.",
+          "timestamp": "2025-05-22T14:00:13.919Z"
+        }
+      ],
+      "createdAt": "2025-05-22T14:00:13.919Z",
+      "score": 70,
+      "feedback": "Feedback generation failed."
+    },
+    {
+      "id": "4b68d15f-7179-417d-bfa1-32ba038db7fa",
+      "candidateId": "86056c0a-d86d-4362-80dd-4379de44df76",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "completed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Welcome to your technical interview for the Project Manager position. I'll be your AI interviewer today.\n\nI'll be asking you questions about your technical experience and knowledge related to this role. Please:\n- Take your time to provide detailed answers\n- Feel free to ask for clarification if needed\n- Share specific examples from your experience\n- Be honest if you're not familiar with a topic",
+          "timestamp": "2025-05-22T14:03:22.698Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! I'll be conducting your technical interview for the Project Manager position today. Let's start by having you tell me about your relevant experience and what interests you about this role.",
+          "timestamp": "2025-05-22T14:03:22.698Z"
+        }
+      ],
+      "createdAt": "2025-05-22T14:03:22.698Z",
+      "score": 0,
+      "feedback": "Interview ended with no responses from the candidate.\n\nFinal Score: 0/100\nQuestions Answered: 0/5 minimum required\n\nNote: Candidate did not provide any responses during the interview."
     }
   ]
 }

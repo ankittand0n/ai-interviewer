@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
-import { Interview, Candidate, JobDescription } from '@/types'
+import { Interview, Candidate, JobDescription, ChatMessage } from '@/types'
+import { generateInterviewResponse } from '@/lib/openai'
 
 const dataPath = path.join(process.cwd(), 'src/data/interviews.json')
 
@@ -34,19 +35,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Candidate or job not found' }, { status: 404 })
     }
 
+    // Create initial system message with interview context
+    const systemMessage: ChatMessage = {
+      role: 'system',
+      content: `Welcome to your technical interview for the ${job.title} position. I'll be your AI interviewer today.
+
+I'll be asking you questions about your technical experience and knowledge related to this role. Please:
+- Take your time to provide detailed answers
+- Feel free to ask for clarification if needed
+- Share specific examples from your experience
+- Be honest if you're not familiar with a topic`,
+      timestamp: new Date().toISOString(),
+    }
+
+    // Create initial AI message
+    const aiMessage: ChatMessage = {
+      role: 'assistant',
+      content: `Hello! I'll be conducting your technical interview for the ${job.title} position today. Let's start by having you tell me about your relevant experience and what interests you about this role.`,
+      timestamp: new Date().toISOString(),
+    }
+
     // Create new interview
     const interview: Interview = {
       id: uuidv4(),
       candidateId,
       jobId,
       status: 'in_progress',
-      messages: [
-        {
-          role: 'system',
-          content: 'Interview started. The AI interviewer will now begin the assessment.',
-          timestamp: new Date().toISOString(),
-        },
-      ],
+      messages: [systemMessage, aiMessage],
       createdAt: new Date().toISOString(),
     }
 

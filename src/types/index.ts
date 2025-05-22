@@ -34,6 +34,18 @@ export interface Interview {
   feedback?: string;
   createdAt: string;
   elapsedTime?: number;
+  continuousScoring?: {
+    currentScore: number;
+    technicalAccuracy: number;
+    jobAlignment: number;
+    communicationClarity: number;
+    uniqueTopicsAsked: number;
+    responses: Array<{
+      messageIndex: number;
+      score: number;
+      feedback: string;
+    }>;
+  };
 }
 
 export interface ChatMessage {
