@@ -5,6 +5,8 @@ services:
     build:
       context: .
       target: ${TARGET:-runner} # Use 'runner' for production, 'deps' for development
+      args:
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
     ports:
       - "3000:3000"
     environment:
