@@ -1,21 +1,16 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useEffect, useState, useRef, useCallback } from 'react'
+import { useParams } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Interview, ChatMessage, JobDescription, Candidate } from '@/types'
 import { toast } from 'sonner'
 
-interface PageParams {
-  id: string;
-}
-
 export default function InterviewPage() {
-  const router = useRouter()
-  const params = useParams() as PageParams
-  const { id } = params
+  const params = useParams()
+  const id = params.id as string
   const [interview, setInterview] = useState<Interview | null>(null)
   const [job, setJob] = useState<JobDescription | null>(null)
   const [candidate, setCandidate] = useState<Candidate | null>(null)
@@ -24,7 +19,31 @@ export default function InterviewPage() {
   const [isEndingInterview, setIsEndingInterview] = useState(false)
   const [timeRemaining, setTimeRemaining] = useState<number | null>(null)
   const chatEndRef = useRef<HTMLDivElement>(null)
-  const timerRef = useRef<NodeJS.Timeout>()
+  const timerRef = useRef<NodeJS.Timeout | undefined>(undefined)
+
+  const handleEndInterview = useCallback(async () => {
+    if (!interview) return
+    
+    setIsEndingInterview(true)
+    try {
+      const response = await fetch(`/api/interviews/${id}/end`, {
+        method: 'POST',
+      })
+      const data = await response.json()
+      if (data.success) {
+        setInterview(data.interview)
+        setTimeRemaining(0)
+        if (timerRef.current) {
+          clearInterval(timerRef.current)
+        }
+        toast.success('Interview completed successfully')
+      }
+    } catch (error) {
+      console.error('Failed to end interview:', error)
+      toast.error('Failed to end interview')
+    }
+    setIsEndingInterview(false)
+  }, [id, interview, timerRef])
 
   useEffect(() => {
     // Load interview data
@@ -74,7 +93,7 @@ export default function InterviewPage() {
         }
       }
     }
-  }, [timeRemaining, interview?.status])
+  }, [timeRemaining, interview?.status, handleEndInterview])
 
   // Handle page leave
   useEffect(() => {
@@ -126,30 +145,6 @@ export default function InterviewPage() {
       console.error('Failed to send message:', error)
     }
     setIsLoading(false)
-  }
-
-  const handleEndInterview = async () => {
-    if (!interview) return
-    
-    setIsEndingInterview(true)
-    try {
-      const response = await fetch(`/api/interviews/${id}/end`, {
-        method: 'POST',
-      })
-      const data = await response.json()
-      if (data.success) {
-        setInterview(data.interview)
-        setTimeRemaining(0)
-        if (timerRef.current) {
-          clearInterval(timerRef.current)
-        }
-        toast.success('Interview completed successfully')
-      }
-    } catch (error) {
-      console.error('Failed to end interview:', error)
-      toast.error('Failed to end interview')
-    }
-    setIsEndingInterview(false)
   }
 
   if (!interview || !job || !candidate) {

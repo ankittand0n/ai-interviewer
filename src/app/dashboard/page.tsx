@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -34,6 +34,25 @@ export default function Dashboard() {
   const [editingCandidate, setEditingCandidate] = useState<Candidate | null>(null)
   const [deleteConfirmation, setDeleteConfirmation] = useState<{ type: 'job' | 'candidate'; id: string } | null>(null)
 
+  const refreshData = useCallback(async () => {
+    try {
+      const [jobsRes, candidatesRes] = await Promise.all([
+        fetch('/api/jobs'),
+        fetch('/api/candidates')
+      ])
+      const [jobsData, candidatesData] = await Promise.all([
+        jobsRes.json(),
+        candidatesRes.json()
+      ])
+      setJobs(jobsData.jobs)
+      setCandidates(candidatesData.candidates)
+      setDeleteConfirmation(null)
+    } catch (error) {
+      console.error('Failed to refresh data:', error)
+      toast.error('Failed to refresh data')
+    }
+  }, [])
+
   useEffect(() => {
     // Check if user is logged in
     const user = sessionStorage.getItem('user')
@@ -57,6 +76,10 @@ export default function Dashboard() {
       .then(data => setInterviews(data.interviews))
   }, [router])
 
+  useEffect(() => {
+    refreshData()
+  }, [refreshData])
+
   const handleAddJob = () => {
     const job: JobDescription = {
       id: uuidv4(),
@@ -72,7 +95,7 @@ export default function Dashboard() {
       body: JSON.stringify(job),
     })
       .then(res => res.json())
-      .then(data => {
+      .then(() => {
         setJobs([...jobs, job])
         setNewJob({ title: '', description: '', requirementsText: '' })
       })
@@ -92,7 +115,7 @@ export default function Dashboard() {
       body: JSON.stringify(candidate),
     })
       .then(res => res.json())
-      .then(data => {
+      .then(() => {
         setCandidates([...candidates, candidate])
         setNewCandidate({ name: '', email: '', phone: '', jobId: '', resumeText: '' })
       })
@@ -126,14 +149,16 @@ export default function Dashboard() {
       const response = await fetch(`/api/jobs/${id}`, {
         method: 'DELETE',
       })
-      const data = await response.json()
-      if (data.success) {
-        setJobs(jobs.filter(j => j.id !== id))
-        setDeleteConfirmation(null)
-        toast.success('Job deleted successfully')
-      } else {
-        toast.error(data.error || 'Failed to delete job')
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        toast.error(errorData.error || 'Failed to delete job')
+        return
       }
+      
+      await response.json() // Consume the response
+      toast.success('Job deleted successfully')
+      refreshData()
     } catch (error) {
       console.error('Failed to delete job:', error)
       toast.error('Failed to delete job')
@@ -164,14 +189,16 @@ export default function Dashboard() {
       const response = await fetch(`/api/candidates/${id}`, {
         method: 'DELETE',
       })
-      const data = await response.json()
-      if (data.success) {
-        setCandidates(candidates.filter(c => c.id !== id))
-        setDeleteConfirmation(null)
-        toast.success('Candidate deleted successfully')
-      } else {
-        toast.error(data.error || 'Failed to delete candidate')
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        toast.error(errorData.error || 'Failed to delete candidate')
+        return
       }
+      
+      await response.json() // Consume the response
+      toast.success('Candidate deleted successfully')
+      refreshData()
     } catch (error) {
       console.error('Failed to delete candidate:', error)
       toast.error('Failed to delete candidate')

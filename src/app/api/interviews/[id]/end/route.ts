@@ -8,8 +8,9 @@ const dataPath = path.join(process.cwd(), 'src/data')
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params
   try {
     // Load all necessary data
     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
@@ -20,7 +21,7 @@ export async function POST(
     const jobsData = JSON.parse(jobsContent)
     const candidatesData = JSON.parse(candidatesContent)
 
-    const interview = interviewsData.interviews.find((i: Interview) => i.id === params.id)
+    const interview = interviewsData.interviews.find((i: Interview) => i.id === id)
     if (!interview) {
       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
     }
