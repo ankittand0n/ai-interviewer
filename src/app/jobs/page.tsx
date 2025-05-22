@@ -1,11 +1,36 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
+import { JobDescription } from '@/types'
 
 export default function JobsPage() {
+  const [jobs, setJobs] = useState<JobDescription[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadJobs() {
+      try {
+        const response = await fetch('/api/jobs')
+        const data = await response.json()
+        setJobs(data.jobs || [])
+      } catch (error) {
+        console.error('Failed to load jobs:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadJobs()
+  }, [])
+
+  if (loading) {
+    return <div className="text-center p-6">Loading jobs...</div>
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -19,17 +44,20 @@ export default function JobsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Sample job cards - will be replaced with real data */}
-        {[1, 2, 3].map((i) => (
-          <Card key={i}>
+        {jobs.map((job) => (
+          <Card key={job.id}>
             <CardHeader>
               <CardTitle className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-semibold">Senior Software Engineer</h3>
-                  <p className="text-sm text-muted-foreground">Engineering</p>
+                  <h3 className="text-lg font-semibold">{job.title}</h3>
+                  <p className="text-sm text-muted-foreground">{job.department}</p>
                 </div>
-                <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-                  Active
+                <span className={`px-2 py-1 text-xs rounded-full ${
+                  job.status === 'active' 
+                    ? 'bg-green-100 text-green-800' 
+                    : 'bg-gray-100 text-gray-800'
+                }`}>
+                  {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
                 </span>
               </CardTitle>
             </CardHeader>
@@ -37,23 +65,29 @@ export default function JobsPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="text-sm">Remote</p>
+                  <p className="text-sm">{job.location}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Experience</p>
-                  <p className="text-sm">5+ years</p>
+                  <p className="text-sm">{job.experience}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Interviews</p>
-                  <p className="text-sm">12 completed, 3 scheduled</p>
+                  <p className="text-sm">
+                    {job.interviewsCompleted} completed, {job.interviewsScheduled} scheduled
+                  </p>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    Edit
-                  </Button>
-                  <Button variant="outline" size="sm" className="flex-1">
-                    View Candidates
-                  </Button>
+                  <Link href={`/jobs/${job.id}/edit`} className="flex-1">
+                    <Button variant="outline" size="sm" className="w-full">
+                      Edit
+                    </Button>
+                  </Link>
+                  <Link href={`/jobs/${job.id}/candidates`} className="flex-1">
+                    <Button variant="outline" size="sm" className="w-full">
+                      View Candidates
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </CardContent>

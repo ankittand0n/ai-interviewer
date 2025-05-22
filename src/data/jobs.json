@@ -83,6 +83,54 @@
         "Experience conducting user research and usability testing",
         "Bachelor's degree in Design, HCI, or related field"
       ]
+    },
+    {
+      "id": "bafb4a74-0f67-4964-9713-ad8cad2b015e",
+      "title": "SSS",
+      "department": "product",
+      "location": "onsite",
+      "type": "full-time",
+      "experience": "mid",
+      "description": "Required Qualifications:\nBachelor’s degree in Computer Science, Engineering, or a related field.\n\n3+ years of professional experience in Java development.\n\nStrong knowledge of Java (8 or later) and object-oriented programming principles.\n\nExperience with frameworks like Spring, Spring Boot, Hibernate, or similar.\n\nProficiency in RESTful APIs, microservices architecture, and multithreading concepts.\n\nFamiliarity with relational databases such as MySQL, PostgreSQL, or Oracle.\n\nWorking knowledge of version control tools (e.g., Git).\n\nUnderstanding of Agile methodologies (Scrum, Kanban).",
+      "requirements": [
+        "asdasdRequired Qualifications:",
+        "Bachelor’s degree in Computer Science, Engineering, or a related field.",
+        "3+ years of professional experience in Java development.",
+        "Strong knowledge of Java (8 or later) and object-oriented programming principles.",
+        "Experience with frameworks like Spring, Spring Boot, Hibernate, or similar.",
+        "Proficiency in RESTful APIs, microservices architecture, and multithreading concepts.",
+        "Familiarity with relational databases such as MySQL, PostgreSQL, or Oracle.",
+        "Working knowledge of version control tools (e.g., Git).",
+        "Understanding of Agile methodologies (Scrum, Kanban)."
+      ],
+      "status": "active",
+      "createdAt": "2025-05-22T16:18:31.030Z",
+      "interviewsCompleted": 0,
+      "interviewsScheduled": 0
+    },
+    {
+      "id": "81c32de5-8fd9-47ae-998f-9ccb4d5db199",
+      "title": "dasdasd",
+      "department": "design",
+      "location": "onsite",
+      "type": "full-time",
+      "experience": "senior",
+      "description": "Required Qualifications:\nBachelor’s degree in Computer Science, Engineering, or a related field.\n\n3+ years of professional experience in Java development.\n\nStrong knowledge of Java (8 or later) and object-oriented programming principles.\n\nExperience with frameworks like Spring, Spring Boot, Hibernate, or similar.\n\nProficiency in RESTful APIs, microservices architecture, and multithreading concepts.\n\nFamiliarity with relational databases such as MySQL, PostgreSQL, or Oracle.\n\nWorking knowledge of version control tools (e.g., Git).\n\nUnderstanding of Agile methodologies (Scrum, Kanban).",
+      "requirements": [
+        "asdRequired Qualifications:",
+        "Bachelor’s degree in Computer Science, Engineering, or a related field.",
+        "3+ years of professional experience in Java development.",
+        "Strong knowledge of Java (8 or later) and object-oriented programming principles.",
+        "Experience with frameworks like Spring, Spring Boot, Hibernate, or similar.",
+        "Proficiency in RESTful APIs, microservices architecture, and multithreading concepts.",
+        "Familiarity with relational databases such as MySQL, PostgreSQL, or Oracle.",
+        "Working knowledge of version control tools (e.g., Git).",
+        "Understanding of Agile methodologies (Scrum, Kanban)."
+      ],
+      "status": "active",
+      "createdAt": "2025-05-22T16:19:09.569Z",
+      "interviewsCompleted": 0,
+      "interviewsScheduled": 0
     }
   ]
 }

@@ -5,6 +5,27 @@ import { JobDescription, Candidate } from '@/types'
 
 const dataPath = path.join(process.cwd(), 'src/data/jobs.json')
 
+export async function GET(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params
+  try {
+    const fileContent = await fs.readFile(dataPath, 'utf8')
+    const data = JSON.parse(fileContent)
+    
+    const job = data.jobs.find((j: JobDescription) => j.id === id)
+    if (!job) {
+      return NextResponse.json({ error: 'Job not found' }, { status: 404 })
+    }
+
+    return NextResponse.json(job)
+  } catch (error) {
+    console.error('Failed to fetch job:', error)
+    return NextResponse.json({ error: 'Failed to fetch job' }, { status: 500 })
+  }
+}
+
 export async function PUT(
   request: Request,
   context: { params: Promise<{ id: string }> }

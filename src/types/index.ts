@@ -1,9 +1,16 @@
 export interface JobDescription {
   id: string;
   title: string;
+  department: string;
+  location: string;
+  type: string;
+  experience: string;
+  status: string;
   description: string;
   requirements: string[];
   createdAt: string;
+  interviewsCompleted: number;
+  interviewsScheduled: number;
 }
 
 export interface Candidate {

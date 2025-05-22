@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -7,7 +9,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,9 +24,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useRouter } from 'next/navigation'
-import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'sonner'
+import { JobDescription } from '@/types'
 
 const formSchema = z.object({
   title: z.string().min(1, 'Job title is required'),
@@ -37,8 +37,11 @@ const formSchema = z.object({
   requirements: z.string().min(50, 'Requirements must be at least 50 characters'),
 })
 
-export default function CreateJobPage() {
+export default function EditJobPage() {
+  const params = useParams()
   const router = useRouter()
+  const [loading, setLoading] = useState(true)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,29 +55,47 @@ export default function CreateJobPage() {
     },
   })
 
+  useEffect(() => {
+    async function loadJob() {
+      try {
+        const response = await fetch(`/api/jobs/${params.id}`)
+        if (!response.ok) {
+          throw new Error('Failed to load job')
+        }
+        const data = await response.json()
+        
+        // Set form values
+        form.reset({
+          title: data.title,
+          department: data.department,
+          location: data.location,
+          type: data.type,
+          experience: data.experience,
+          description: data.description,
+          requirements: Array.isArray(data.requirements) ? data.requirements.join('\n') : data.requirements,
+        })
+      } catch (error) {
+        console.error('Error loading job:', error)
+        toast.error('Failed to load job')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (params.id) {
+      loadJob()
+    }
+  }, [params.id, form])
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log('Form values:', values)
-      
-      // Validate all required fields are present
-      if (!values.title || !values.department || !values.location || !values.type || !values.experience || !values.description || !values.requirements) {
-        toast.error('Please fill in all required fields')
-        return
-      }
-
       const jobData = {
-        id: uuidv4(),
         ...values,
-        status: 'active',
-        createdAt: new Date().toISOString(),
-        interviewsCompleted: 0,
-        interviewsScheduled: 0,
         requirements: values.requirements.split('\n').filter(req => req.trim()),
       }
-      console.log('Job data to send:', jobData)
 
-      const response = await fetch('/api/jobs', {
-        method: 'POST',
+      const response = await fetch(`/api/jobs/${params.id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -82,24 +103,26 @@ export default function CreateJobPage() {
       })
 
       const responseData = await response.json()
-      console.log('Server response:', responseData)
 
       if (!response.ok) {
-        console.error('Server error:', responseData)
-        throw new Error(responseData.error || 'Failed to create job')
+        throw new Error(responseData.error || 'Failed to update job')
       }
 
-      toast.success('Job created successfully')
-      router.push('/jobs/active')
+      toast.success('Job updated successfully')
+      router.push('/jobs')
     } catch (error) {
-      console.error('Error creating job:', error)
-      toast.error(error instanceof Error ? error.message : 'Failed to create job')
+      console.error('Error updating job:', error)
+      toast.error(error instanceof Error ? error.message : 'Failed to update job')
     }
+  }
+
+  if (loading) {
+    return <div className="text-center p-6">Loading job details...</div>
   }
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Create New Job</h1>
+      <h1 className="text-3xl font-bold">Edit Job</h1>
 
       <Card>
         <CardHeader>
@@ -246,7 +269,7 @@ export default function CreateJobPage() {
                     <FormLabel>Requirements</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Enter job requirements..."
+                        placeholder="Enter job requirements (one per line)..."
                         className="min-h-[150px]"
                         {...field}
                       />
@@ -257,7 +280,7 @@ export default function CreateJobPage() {
               />
 
               <div className="flex gap-4">
-                <Button type="submit">Create Job</Button>
+                <Button type="submit">Save Changes</Button>
                 <Button type="button" variant="outline" onClick={() => router.push('/jobs')}>
                   Cancel
                 </Button>
