@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      target: ${TARGET:-runner} # Use 'runner' for production, 'deps' for development
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./data:/app/data # Persist interview data
+      - ${NODE_ENV:-production}-modules:/app/node_modules
+      # Development-only volumes
+      - ${NODE_ENV:-production}-next:/app/.next
+      - ${NODE_ENV:-production}-cache:/app/.cache
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  production-modules:
+  production-next:
+  production-cache:
+  development-modules:
+  development-next:
+  development-cache: 
