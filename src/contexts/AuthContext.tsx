@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check if user is authenticated on mount
-    const userStr = sessionStorage.getItem('user')
+    const userStr = localStorage.getItem('user')
     if (userStr) {
       const user = JSON.parse(userStr)
       setUser(user)
@@ -33,13 +33,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const login = (user: any) => {
-    sessionStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user))
     setUser(user)
     setIsAuthenticated(true)
   }
 
   const logout = () => {
-    sessionStorage.removeItem('user')
+    localStorage.removeItem('user')
     setUser(null)
     setIsAuthenticated(false)
     router.push('/')
