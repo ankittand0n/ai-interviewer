@@ -3,13 +3,16 @@
     {
       "id": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
       "title": "Java Developer L1",
-      "description": "Core java",
+      "description": "Core Java\nAdvanced Java\nhands on java 8 experience \nmulti threading\nspring boot\nspring security \nmicro services \nhibernate \nKubernetes\ndocker\n",
       "requirements": [
         "Strong in Java, SpringBoot & Microservices",
-        "Strong in Kubernetes & Docker"
+        "Strong in Kubernetes & Docker",
+        "Collections framework",
+        "stream api ",
+        "java 8"
       ],
       "createdAt": "2025-05-21T17:04:58.530Z",
-      "requirementsText": "Strong in Java, SpringBoot & Microservices\nStrong in Kubernetes & Docker"
+      "requirementsText": "Strong in Java, SpringBoot & Microservices\nStrong in Kubernetes & Docker\nCollections framework\nstream api \njava 8"
     }
   ]
 }

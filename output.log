@@ -1,0 +1,168 @@
+nohup: ignoring input
+
+> interviewer@0.1.0 dev /root/ai-interviewer
+> next dev --turbopack
+
+   ▲ Next.js 15.3.2 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://159.65.159.94:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 6.4s
+ GET / 200 in 7003ms
+ ⚠ Cross origin request detected from 159.65.159.94 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 2.8s
+ GET /dashboard 200 in 1092ms
+ GET /dashboard 200 in 2941ms
+ ○ Compiling /api/jobs ...
+ GET /api/candidates 200 in 2905ms
+ GET /api/candidates 200 in 3037ms
+ ✓ Compiled /api/jobs in 3.2s
+ GET /api/interviews 200 in 2986ms
+ GET /api/interviews 200 in 3041ms
+ GET /api/jobs 200 in 3118ms
+ GET /api/jobs 200 in 3314ms
+ ○ Compiling /api/jobs/[id] ...
+ ✓ Compiled /api/jobs/[id] in 1106ms
+Error: Route "/api/jobs/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/jobs/[id]/route.ts:17:80)
+    at Array.findIndex (<anonymous>)
+    at PUT (src/app/api/jobs/[id]/route.ts:17:31)
+  15 |     const data = JSON.parse(fileContent)
+  16 |     
+> 17 |     const jobIndex = data.jobs.findIndex((j: JobDescription) => j.id === params.id)
+     |                                                                                ^
+  18 |     if (jobIndex === -1) {
+  19 |       return NextResponse.json({ error: 'Job not found' }, { status: 404 })
+  20 |     }
+ PUT /api/jobs/026d69c4-0c13-4b31-b617-fe8caa3c1dd3 200 in 2533ms
+Error: Route "/api/jobs/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/jobs/[id]/route.ts:17:80)
+    at Array.findIndex (<anonymous>)
+    at PUT (src/app/api/jobs/[id]/route.ts:17:31)
+  15 |     const data = JSON.parse(fileContent)
+  16 |     
+> 17 |     const jobIndex = data.jobs.findIndex((j: JobDescription) => j.id === params.id)
+     |                                                                                ^
+  18 |     if (jobIndex === -1) {
+  19 |       return NextResponse.json({ error: 'Job not found' }, { status: 404 })
+  20 |     }
+ PUT /api/jobs/026d69c4-0c13-4b31-b617-fe8caa3c1dd3 200 in 349ms
+Error: Route "/api/jobs/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/jobs/[id]/route.ts:17:80)
+    at Array.findIndex (<anonymous>)
+    at PUT (src/app/api/jobs/[id]/route.ts:17:31)
+  15 |     const data = JSON.parse(fileContent)
+  16 |     
+> 17 |     const jobIndex = data.jobs.findIndex((j: JobDescription) => j.id === params.id)
+     |                                                                                ^
+  18 |     if (jobIndex === -1) {
+  19 |       return NextResponse.json({ error: 'Job not found' }, { status: 404 })
+  20 |     }
+ PUT /api/jobs/026d69c4-0c13-4b31-b617-fe8caa3c1dd3 200 in 234ms
+ POST /api/candidates 200 in 45ms
+ ○ Compiling /interview/[id] ...
+ ✓ Compiled /interview/[id] in 2.8s
+ GET /interview/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 1724ms
+ GET /interview/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 4322ms
+ GET /interview/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 124ms
+ GET /interview/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 137ms
+ ○ Compiling /api/interviews/[id] ...
+ ✓ Compiled /api/interviews/[id] in 1508ms
+Error: Route "/api/interviews/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/interviews/[id]/route.ts:15:81)
+    at Array.find (<anonymous>)
+    at GET (src/app/api/interviews/[id]/route.ts:15:48)
+  13 |     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+  14 |     const interviewsData = JSON.parse(interviewsContent)
+> 15 |     const interview = interviewsData.interviews.find((i: any) => i.id === params.id)
+     |                                                                                 ^
+  16 |
+  17 |     if (!interview) {
+  18 |       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+Error: Route "/api/interviews/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/interviews/[id]/route.ts:15:81)
+    at Array.find (<anonymous>)
+    at GET (src/app/api/interviews/[id]/route.ts:15:48)
+  13 |     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+  14 |     const interviewsData = JSON.parse(interviewsContent)
+> 15 |     const interview = interviewsData.interviews.find((i: any) => i.id === params.id)
+     |                                                                                 ^
+  16 |
+  17 |     if (!interview) {
+  18 |       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+Error: Route "/api/interviews/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/interviews/[id]/route.ts:15:81)
+    at Array.find (<anonymous>)
+    at GET (src/app/api/interviews/[id]/route.ts:15:48)
+  13 |     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+  14 |     const interviewsData = JSON.parse(interviewsContent)
+> 15 |     const interview = interviewsData.interviews.find((i: any) => i.id === params.id)
+     |                                                                                 ^
+  16 |
+  17 |     if (!interview) {
+  18 |       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+Error: Route "/api/interviews/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/interviews/[id]/route.ts:15:81)
+    at Array.find (<anonymous>)
+    at GET (src/app/api/interviews/[id]/route.ts:15:48)
+  13 |     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+  14 |     const interviewsData = JSON.parse(interviewsContent)
+> 15 |     const interview = interviewsData.interviews.find((i: any) => i.id === params.id)
+     |                                                                                 ^
+  16 |
+  17 |     if (!interview) {
+  18 |       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+ GET /api/interviews/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 3036ms
+ GET /api/interviews/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 3027ms
+ ○ Compiling /_not-found/page ...
+ GET /favicon.ico 200 in 2628ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 2373ms
+ ✓ Compiled /_not-found/page in 2.8s
+ GET /apple-touch-icon.png 404 in 2770ms
+ GET /apple-touch-icon-precomposed.png 404 in 2981ms
+ GET /apple-touch-icon-120x120-precomposed.png 404 in 107ms
+ GET /interview/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 144ms
+Error: Route "/api/interviews/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/interviews/[id]/route.ts:15:81)
+    at Array.find (<anonymous>)
+    at GET (src/app/api/interviews/[id]/route.ts:15:48)
+  13 |     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+  14 |     const interviewsData = JSON.parse(interviewsContent)
+> 15 |     const interview = interviewsData.interviews.find((i: any) => i.id === params.id)
+     |                                                                                 ^
+  16 |
+  17 |     if (!interview) {
+  18 |       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+Error: Route "/api/interviews/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at <unknown> (src/app/api/interviews/[id]/route.ts:15:81)
+    at Array.find (<anonymous>)
+    at GET (src/app/api/interviews/[id]/route.ts:15:48)
+  13 |     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+  14 |     const interviewsData = JSON.parse(interviewsContent)
+> 15 |     const interview = interviewsData.interviews.find((i: any) => i.id === params.id)
+     |                                                                                 ^
+  16 |
+  17 |     if (!interview) {
+  18 |       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+ GET /api/interviews/824df6e2-8bd6-41ee-873f-010c9f2deff8 200 in 414ms
+ GET /dashboard 200 in 84ms
+ GET /api/interviews 200 in 128ms
+ GET /api/jobs 200 in 132ms
+ GET /api/candidates 200 in 139ms
+ GET /api/candidates 200 in 144ms
+ GET /api/jobs 200 in 147ms
+ GET /api/interviews 200 in 149ms
+ GET / 200 in 41ms
+ GET /dashboard 200 in 65ms
+ GET /api/jobs 200 in 35ms
+ GET /api/candidates 200 in 80ms
+ GET /api/interviews 200 in 90ms
+ GET /api/candidates 200 in 88ms
+ GET /api/jobs 200 in 71ms
+ GET /api/interviews 200 in 73ms

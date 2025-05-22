@@ -1,0 +1,13 @@
+
+> interviewer@0.1.0 dev /root/ai-interviewer
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use, using available port 3001 instead.
+   ▲ Next.js 15.3.2 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://159.65.159.94:3001
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1928ms
+[?25h
