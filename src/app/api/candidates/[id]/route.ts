@@ -73,15 +73,16 @@ export async function DELETE(
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params
   try {
     const dataPath = path.join(process.cwd(), 'src/data')
     const candidatesContent = await fs.readFile(path.join(dataPath, 'candidates.json'), 'utf8')
     const candidatesData = JSON.parse(candidatesContent)
 
     const candidate = candidatesData.candidates.find(
-      (c: Candidate) => c.id === params.id
+      (c: Candidate) => c.id === id
     )
 
     if (!candidate) {

@@ -32,44 +32,49 @@ function NavItem({ href, icon, label, isActive, count, children }: NavItemProps)
   const [isOpen, setIsOpen] = useState(true)
   const hasChildren = children && children.length > 0
 
+  const handleExpandClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div>
-      <Link href={href}>
-        <Button
-          variant="ghost"
-          className={cn(
-            "w-full justify-start gap-2 px-2",
-            isActive && "bg-muted"
-          )}
-        >
-          {icon}
-          <span className="flex-1 text-left">{label}</span>
-          {count !== undefined && (
-            <span className="ml-auto text-muted-foreground text-sm">
-              {count}
-            </span>
-          )}
-          {hasChildren && (
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                setIsOpen(!isOpen)
-              }}
-              className="ml-auto"
-            >
-              {isOpen ? (
-                <ChevronDown className="h-4 w-4" />
-              ) : (
-                <ChevronRight className="h-4 w-4" />
-              )}
-            </button>
-          )}
-        </Button>
-      </Link>
+      <div className="flex">
+        <Link href={href} className="flex-1">
+          <Button
+            variant="ghost"
+            className={cn(
+              "w-full justify-start gap-2 px-2",
+              isActive && "bg-muted"
+            )}
+          >
+            {icon}
+            <span className="flex-1 text-left">{label}</span>
+            {count !== undefined && (
+              <span className="ml-auto text-muted-foreground text-sm">
+                {count}
+              </span>
+            )}
+          </Button>
+        </Link>
+        {hasChildren && (
+          <Button
+            variant="ghost"
+            className="px-2"
+            onClick={handleExpandClick}
+          >
+            {isOpen ? (
+              <ChevronDown className="h-4 w-4" />
+            ) : (
+              <ChevronRight className="h-4 w-4" />
+            )}
+          </Button>
+        )}
+      </div>
       {hasChildren && isOpen && (
         <div className="ml-4 mt-1 space-y-1">
           {children.map((child) => (
-            <Link key={child.href} href={child.href}>
+            <Link key={child.href} href={child.href} className="block">
               <Button
                 variant="ghost"
                 className={cn(

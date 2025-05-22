@@ -8,13 +8,17 @@ import { Toaster } from "sonner"
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isLoginPage = pathname === '/'
+  const isPublicRoute = pathname === '/' || pathname.startsWith('/interview/')
 
   return (
     <AuthProvider>
-      <ProtectedRoute>
-        {isLoginPage ? children : <DashboardLayout>{children}</DashboardLayout>}
-      </ProtectedRoute>
+      {isPublicRoute ? (
+        children
+      ) : (
+        <ProtectedRoute>
+          <DashboardLayout>{children}</DashboardLayout>
+        </ProtectedRoute>
+      )}
       <Toaster />
     </AuthProvider>
   )

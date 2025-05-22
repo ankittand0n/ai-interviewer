@@ -7,7 +7,8 @@ mkdir -p logs
 if [ -f .env ]; then
     export $(cat .env | xargs)
 fi
-
+pnpm install
+pnpm build
 # Start the application in the background with logging
 nohup pnpm start > logs/app.log 2>&1 &
 

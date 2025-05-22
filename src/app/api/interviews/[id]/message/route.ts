@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
-import { ChatMessage, Interview, JobDescription, Candidate } from '@/types'
+import { ChatMessage, Interview, JobDescription } from '@/types'
 import { generateInterviewResponse, evaluateResponse } from '@/lib/openai'
 
 const dataPath = path.join(process.cwd(), 'src/data')
@@ -46,14 +46,12 @@ export async function POST(
   try {
     const { message, elapsedTime } = await request.json()
 
-    // Load all necessary data
+    // Load interview and job data
     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
     const jobsContent = await fs.readFile(path.join(dataPath, 'jobs.json'), 'utf8')
-    const candidatesContent = await fs.readFile(path.join(dataPath, 'candidates.json'), 'utf8')
 
     const interviewsData = JSON.parse(interviewsContent)
     const jobsData = JSON.parse(jobsContent)
-    const candidatesData = JSON.parse(candidatesContent)
 
     const interview = interviewsData.interviews.find((i: Interview) => i.id === id)
     if (!interview) {
@@ -61,7 +59,6 @@ export async function POST(
     }
 
     const job = jobsData.jobs.find((j: JobDescription) => j.id === interview.jobId)
-    const candidate = candidatesData.candidates.find((c: Candidate) => c.id === interview.candidateId)
 
     // Update elapsed time
     interview.elapsedTime = elapsedTime
@@ -81,28 +78,22 @@ export async function POST(
         `Questions Answered: 0/${MIN_QUESTIONS_FOR_POOR_PERFORMANCE} minimum required\n\n` +
         `Note: Candidate did not provide any responses during the interview.`
 
-      // Update candidate status to rejected
-      const candidateToUpdate = candidatesData.candidates.find((c: Candidate) => c.id === interview.candidateId)
-      if (candidateToUpdate) {
-        candidateToUpdate.status = 'rejected'
-        await fs.writeFile(path.join(dataPath, 'candidates.json'), JSON.stringify(candidatesData, null, 2))
-      }
-
       // Save updated interview data
       await fs.writeFile(path.join(dataPath, 'interviews.json'), JSON.stringify(interviewsData, null, 2))
 
       return NextResponse.json({
-        success: true,
-        interview,
-        job,
-        candidate,
-        message: 'Interview ended with no responses'
+        id: interview.id,
+        status: interview.status,
+        messages: interview.messages,
+        elapsedTime: interview.elapsedTime,
+        score: interview.score,
+        feedback: interview.feedback
       })
     }
 
     if (message.role === 'user') {
       // Evaluate the response
-      const evaluation = await evaluateResponse(message.content, interview, job, candidate)
+      const evaluation = await evaluateResponse(message.content, interview, job)
 
       // Initialize continuous scoring if it doesn't exist
       if (!interview.continuousScoring) {
@@ -157,7 +148,6 @@ export async function POST(
 
         // Penalize for insufficient responses/coverage
         if (responseCount < MIN_QUESTIONS_FOR_POOR_PERFORMANCE) {
-          // Significant penalty for not completing minimum questions
           finalScore = Math.min(finalScore, 
             finalScore * (responseCount / MIN_QUESTIONS_FOR_POOR_PERFORMANCE) * 0.8)
         }
@@ -187,48 +177,40 @@ export async function POST(
           `${shouldEndInterview ? 'Note: Interview was terminated early due to performance concerns.' : ''}\n\n` +
           `Detailed Feedback:\n${evaluation.feedback}`
 
-        // Update candidate status based on final score
-        const candidateToUpdate = candidatesData.candidates.find((c: Candidate) => c.id === interview.candidateId)
-        if (candidateToUpdate) {
-          candidateToUpdate.status = interview.score >= SCORE_THRESHOLDS.DECENT ? 'selected' : 'rejected'
-          await fs.writeFile(path.join(dataPath, 'candidates.json'), JSON.stringify(candidatesData, null, 2))
-        }
-
         // Save updated interview data
         await fs.writeFile(path.join(dataPath, 'interviews.json'), JSON.stringify(interviewsData, null, 2))
 
         return NextResponse.json({
-          success: true,
-          interview,
-          job,
-          candidate,
-          message: shouldEndInterview ? 
-            `Interview ended early after evaluating ${topicsCovered} different skill areas - Final Score: ${interview.score}/100` : 
-            'Interview time limit reached'
+          id: interview.id,
+          status: interview.status,
+          messages: interview.messages,
+          elapsedTime: interview.elapsedTime,
+          score: interview.score,
+          feedback: interview.feedback
         })
       }
-    }
 
-    // Generate AI response
-    const aiResponse = await generateInterviewResponse(message.content, interview, job, candidate)
-    const aiMessage: ChatMessage = {
-      role: 'assistant',
-      content: aiResponse,
-      timestamp: new Date().toISOString(),
+      // Generate AI response
+      const aiResponse = await generateInterviewResponse(message.content, interview, job)
+      const aiMessage: ChatMessage = {
+        role: 'assistant',
+        content: aiResponse,
+        timestamp: new Date().toISOString()
+      }
+      interview.messages.push(aiMessage)
     }
-    interview.messages.push(aiMessage)
 
     // Save updated interview data
     await fs.writeFile(path.join(dataPath, 'interviews.json'), JSON.stringify(interviewsData, null, 2))
 
     return NextResponse.json({
-      success: true,
-      interview,
-      job,
-      candidate,
+      id: interview.id,
+      status: interview.status,
+      messages: interview.messages,
+      elapsedTime: interview.elapsedTime
     })
   } catch (error) {
-    console.error('Error in message handling:', error)
+    console.error('Failed to process message:', error)
     return NextResponse.json({ error: 'Failed to process message' }, { status: 500 })
   }
 } 

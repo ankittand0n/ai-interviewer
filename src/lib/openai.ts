@@ -1,5 +1,5 @@
 import OpenAI from 'openai'
-import { Interview, JobDescription, Candidate } from '@/types'
+import { Interview, JobDescription } from '@/types'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -18,7 +18,6 @@ export async function evaluateResponse(
   message: string,
   interview: Interview,
   job: JobDescription,
-  candidate: Candidate
 ): Promise<ResponseEvaluation> {
   const evaluationPrompt = `You are an expert technical interviewer evaluating a candidate's response.
 
@@ -101,7 +100,6 @@ export async function generateInterviewResponse(
   message: string,
   interview: Interview,
   job: JobDescription,
-  candidate: Candidate
 ): Promise<string> {
   const systemPrompt = `You are an expert technical interviewer conducting an interview for the position of ${job.title}.
 Your task is to:
@@ -114,9 +112,6 @@ Job Details:
 - Title: ${job.title}
 - Description: ${job.description}
 - Required Skills: ${job.requirements.join(', ')}
-
-Candidate Background:
-${candidate.resumeText}
 
 Interview Guidelines:
 - Ask one question at a time
@@ -155,7 +150,6 @@ Current interview progress: ${interview.messages.length} messages exchanged.`
 export async function generateInterviewFeedback(
   interview: Interview,
   job: JobDescription,
-  candidate: Candidate
 ): Promise<{ score: number; feedback: string }> {
   const feedbackPrompt = `You are an expert technical interviewer reviewing a completed interview.
 
@@ -163,9 +157,6 @@ Job Details:
 - Title: ${job.title}
 - Description: ${job.description}
 - Required Skills: ${job.requirements.join(', ')}
-
-Candidate Background:
-${candidate.resumeText}
 
 Interview Conversation:
 ${interview.messages.map(msg => `${msg.role}: ${msg.content}`).join('\n')}

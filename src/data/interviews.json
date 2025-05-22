@@ -476,7 +476,7 @@
       "candidateName": "Ankit Tandon",
       "jobId": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
       "jobTitle": "Java Developer L1",
-      "status": "scheduled",
+      "status": "in_progress",
       "messages": [
         {
           "role": "system",
@@ -485,7 +485,52 @@
         }
       ],
       "createdAt": "2025-05-22T14:54:59.544Z",
-      "updatedAt": "2025-05-22T14:54:59.544Z"
+      "updatedAt": "2025-05-22T14:54:59.544Z",
+      "startedAt": "2025-05-22T15:44:39.955Z",
+      "elapsedTime": 0
+    },
+    {
+      "id": "414b7d7d-fb61-4d0a-a7c1-7ef74d219de4",
+      "candidateId": "c1b2d3e4-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
+      "candidateName": "Ankit Kumar",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "jobTitle": "Project Manager",
+      "status": "in_progress",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Welcome to your technical interview for the Project Manager position. I'll be your AI interviewer today.\n\nI'll be asking you questions about your technical experience and knowledge related to this role. Please:\n- Take your time to provide detailed answers\n- Feel free to ask for clarification if needed\n- Share specific examples from your experience\n- Be honest if you're not familiar with a topic",
+          "timestamp": "2025-05-22T15:46:53.968Z"
+        },
+        {
+          "role": "user",
+          "content": "ok",
+          "timestamp": "2025-05-22T15:52:09.749Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! Let's start with a question about project scope management. Could you describe a time when you had to define the project scope, goals, and deliverables in collaboration with senior management and stakeholders? How did you ensure alignment and agreement among all parties involved?",
+          "timestamp": "2025-05-22T15:52:14.187Z"
+        }
+      ],
+      "createdAt": "2025-05-22T15:46:53.968Z",
+      "updatedAt": "2025-05-22T15:46:53.968Z",
+      "startedAt": "2025-05-22T15:47:11.475Z",
+      "elapsedTime": 77040,
+      "continuousScoring": {
+        "currentScore": 0,
+        "technicalAccuracy": 0,
+        "jobAlignment": 0,
+        "communicationClarity": 0,
+        "responses": [
+          {
+            "messageIndex": 1,
+            "score": 0,
+            "feedback": "The candidate has not provided any substantive response to evaluate technical accuracy, job alignment, or communication clarity. It is recommended to end the interview due to the lack of engagement and information provided."
+          }
+        ],
+        "uniqueTopicsAsked": 0
+      }
     }
   ]
 }

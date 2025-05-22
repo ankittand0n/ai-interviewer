@@ -8,7 +8,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-const dataPath = path.join(process.cwd(), 'src/data/interviews.json')
+const dataPath = path.join(process.cwd(), 'src/data')
 
 interface ChatMessage {
   role: 'system' | 'assistant' | 'user'
@@ -18,18 +18,44 @@ interface ChatMessage {
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params
   try {
-    const fileContent = await fs.readFile(dataPath, 'utf8')
-    const data = JSON.parse(fileContent)
+    const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
+    const interviewsData = JSON.parse(interviewsContent)
     
-    const interview = data.interviews.find((i: any) => i.id === params.id)
+    const interview = interviewsData.interviews.find((i: Interview) => i.id === id)
     if (!interview) {
       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
     }
 
-    return NextResponse.json(interview)
+    // Load job data
+    const jobsContent = await fs.readFile(path.join(dataPath, 'jobs.json'), 'utf8')
+    const jobsData = JSON.parse(jobsContent)
+    const job = jobsData.jobs.find((j: JobDescription) => j.id === interview.jobId)
+
+    if (!job) {
+      return NextResponse.json({ error: 'Job not found' }, { status: 404 })
+    }
+
+    // Only return necessary information for public access
+    const publicInterview = {
+      id: interview.id,
+      status: interview.status,
+      messages: interview.messages,
+      elapsedTime: interview.elapsedTime,
+      score: interview.status === 'completed' ? interview.score : undefined,
+      feedback: interview.status === 'completed' ? interview.feedback : undefined,
+      job: {
+        title: job.title,
+        requirements: job.requirements,
+        type: interview.type || 'technical' // Fallback to technical if not specified
+      },
+      createdAt: interview.createdAt
+    }
+
+    return NextResponse.json(publicInterview)
   } catch (error) {
     console.error('Failed to fetch interview:', error)
     return NextResponse.json(
@@ -41,14 +67,15 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params
   try {
     const { status, feedback, message } = await request.json()
-    const fileContent = await fs.readFile(dataPath, 'utf8')
+    const fileContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
     const data = JSON.parse(fileContent)
     
-    const interview = data.interviews.find((i: any) => i.id === params.id)
+    const interview = data.interviews.find((i: any) => i.id === id)
     if (!interview) {
       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
     }
@@ -90,22 +117,16 @@ export async function PATCH(
       }
       interview.messages.push(userMessage)
 
-      // Get job details for context
-      const jobsPath = path.join(process.cwd(), 'src/data/jobs.json')
-      const jobsContent = await fs.readFile(jobsPath, 'utf8')
-      const jobsData = JSON.parse(jobsContent)
-      const job = jobsData.jobs.find((j: any) => j.id === interview.jobId)
-
       // Generate AI response
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",
-            content: `You are conducting a ${interview.type} interview for a ${job.title} position. 
+            content: `You are conducting a ${interview.job.type} interview for a ${interview.job.title} position. 
             Previous messages: ${JSON.stringify(interview.messages)}
-            Job requirements: ${job.requirements}
-            Interview type: ${interview.type}
+            Job requirements: ${interview.job.requirements.join('\n')}
+            Interview type: ${interview.job.type}
             Please provide a relevant response or follow-up question.`
           },
           { role: "user", content: message }
@@ -124,7 +145,7 @@ export async function PATCH(
       interview.messages.push(aiMessage)
     }
 
-    await fs.writeFile(dataPath, JSON.stringify(data, null, 2))
+    await fs.writeFile(path.join(dataPath, 'interviews.json'), JSON.stringify(data, null, 2))
 
     return NextResponse.json(interview)
   } catch (error) {
@@ -135,13 +156,14 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params
   try {
-    const fileContent = await fs.readFile(dataPath, 'utf8')
+    const fileContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
     const data = JSON.parse(fileContent)
     
-    const interviewIndex = data.interviews.findIndex((i: any) => i.id === params.id)
+    const interviewIndex = data.interviews.findIndex((i: any) => i.id === id)
     if (interviewIndex === -1) {
       return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
     }
@@ -168,7 +190,7 @@ export async function DELETE(
 
     // Delete the interview
     data.interviews.splice(interviewIndex, 1)
-    await fs.writeFile(dataPath, JSON.stringify(data, null, 2))
+    await fs.writeFile(path.join(dataPath, 'interviews.json'), JSON.stringify(data, null, 2))
     
     return NextResponse.json({ success: true })
   } catch (error) {

@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Interview, ChatMessage, JobDescription, Candidate } from '@/types'
+import { Interview, ChatMessage } from '@/types'
 import { toast } from 'sonner'
 import {
   AlertDialog,
@@ -26,8 +26,6 @@ export default function InterviewPage() {
   const params = useParams()
   const id = params.id as string
   const [interview, setInterview] = useState<Interview | null>(null)
-  const [job, setJob] = useState<JobDescription | null>(null)
-  const [candidate, setCandidate] = useState<Candidate | null>(null)
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isEndingInterview, setIsEndingInterview] = useState(false)
@@ -141,12 +139,29 @@ export default function InterviewPage() {
     fetch(`/api/interviews/${id}`)
       .then(res => res.json())
       .then(data => {
-        setInterview(data.interview)
-        setJob(data.job)
-        setCandidate(data.candidate)
-        if (data.interview.elapsedTime) {
-          setTimeElapsed(data.interview.elapsedTime)
+        setInterview(data)
+        
+        // If interview is scheduled, automatically start it
+        if (data.status === 'scheduled') {
+          fetch(`/api/interviews/${id}/start`, {
+            method: 'POST'
+          })
+          .then(res => res.json())
+          .then(updatedData => {
+            setInterview(updatedData)
+            startTimeRef.current = Date.now()
+          })
+          .catch(error => {
+            console.error('Failed to start interview:', error)
+            toast.error('Failed to start interview')
+          })
+        } else if (data.status === 'in_progress') {
+          startTimeRef.current = Date.now() - (data.elapsedTime || 0)
         }
+      })
+      .catch(error => {
+        console.error('Failed to load interview:', error)
+        toast.error('Failed to load interview')
       })
   }, [id])
 
@@ -236,7 +251,7 @@ export default function InterviewPage() {
     previousMessageLengthRef.current = newValue.length
   }
 
-  if (!interview || !job || !candidate) {
+  if (!interview) {
     return <div className="flex justify-center items-center min-h-screen">Loading...</div>
   }
 
@@ -267,7 +282,7 @@ export default function InterviewPage() {
         <CardHeader>
           <div className="flex justify-between items-center">
             <div>
-              <CardTitle>Interview for {job.title}</CardTitle>
+              <CardTitle>Interview for {interview.job?.title}</CardTitle>
               {interview.status === 'in_progress' && (
                 <div className="text-sm mt-1">
                   <p className={timeElapsed >= INTERVIEW_DURATION - 5 * 60 * 1000 ? 'text-red-500' : 'text-muted-foreground'}>
@@ -295,12 +310,14 @@ export default function InterviewPage() {
         <CardContent>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <p><strong>Candidate:</strong> {candidate.name}</p>
-              <p><strong>Email:</strong> {candidate.email}</p>
-            </div>
-            <div>
               <p><strong>Status:</strong> {interview.status}</p>
               <p><strong>Started:</strong> {new Date(interview.createdAt).toLocaleString()}</p>
+            </div>
+            <div>
+              <p><strong>Type:</strong> Technical Interview</p>
+              {interview.status === 'in_progress' && (
+                <p><strong>Time Remaining:</strong> {formatTime(INTERVIEW_DURATION - timeElapsed)}</p>
+              )}
             </div>
           </div>
         </CardContent>
@@ -310,31 +327,6 @@ export default function InterviewPage() {
         <CardHeader>
           <CardTitle className="flex justify-between items-center">
             Technical Interview
-            {interview.status === 'completed' && interview.continuousScoring && (
-              <div className="flex items-center gap-4">
-                <div className={`text-lg font-semibold ${
-                  interview.continuousScoring.currentScore >= 80 ? 'text-green-500' :
-                  interview.continuousScoring.currentScore >= 60 ? 'text-yellow-500' :
-                  'text-red-500'
-                }`}>
-                  Final Score: {Math.round(interview.continuousScoring.currentScore)}/100
-                </div>
-                <div className="flex gap-2 text-sm">
-                  <span title="Technical Accuracy" className="text-blue-500">
-                    T: {Math.round(interview.continuousScoring.technicalAccuracy)}
-                  </span>
-                  <span title="Job Alignment" className="text-purple-500">
-                    J: {Math.round(interview.continuousScoring.jobAlignment)}
-                  </span>
-                  <span title="Communication" className="text-teal-500">
-                    C: {Math.round(interview.continuousScoring.communicationClarity)}
-                  </span>
-                  <span title="Topics Covered" className="text-orange-500 ml-2">
-                    Topics: {interview.continuousScoring.uniqueTopicsAsked}/5
-                  </span>
-                </div>
-              </div>
-            )}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4">

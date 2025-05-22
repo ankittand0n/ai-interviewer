@@ -8,14 +8,15 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth()
   const router = useRouter()
   const pathname = usePathname()
+  const isPublicRoute = pathname === '/' || pathname.startsWith('/interview/')
 
   useEffect(() => {
-    if (!isAuthenticated && pathname !== '/') {
+    if (!isAuthenticated && !isPublicRoute) {
       router.push('/')
     }
-  }, [isAuthenticated, router, pathname])
+  }, [isAuthenticated, router, pathname, isPublicRoute])
 
-  if (!isAuthenticated && pathname !== '/') {
+  if (!isAuthenticated && !isPublicRoute) {
     return null
   }
 

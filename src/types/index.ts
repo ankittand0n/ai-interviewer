@@ -26,14 +26,22 @@ export interface User {
 
 export interface Interview {
   id: string;
-  candidateId: string;
   jobId: string;
-  status: 'in_progress' | 'completed';
+  candidateId: string;
+  status: 'scheduled' | 'in_progress' | 'completed';
   messages: ChatMessage[];
   score?: number;
   feedback?: string;
   createdAt: string;
   elapsedTime?: number;
+  job: {
+    title: string;
+    requirements: string[];
+    type: string;
+  };
+  candidate?: {
+    name: string;
+  };
   continuousScoring?: {
     currentScore: number;
     technicalAccuracy: number;

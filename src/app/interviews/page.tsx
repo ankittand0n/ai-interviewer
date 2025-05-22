@@ -111,13 +111,29 @@ export default function InterviewsPage() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href={`/interviews/${interview.id}`}>View Details</Link>
-                    </Button>
-                    {interview.status === 'scheduled' && (
-                      <Button variant="outline" size="sm">
-                        Add Feedback
+                    <Link href={`/interviews/${interview.id}`}>
+                      <Button variant="outline" size="sm" className="w-full">
+                        View Details
                       </Button>
+                    </Link>
+                    {interview.status === 'scheduled' && (
+                      <>
+                        <Link href={`/interview/${interview.id}`}>
+                          <Button variant="default" size="sm" className="w-full">
+                            Start Interview
+                          </Button>
+                        </Link>
+                        <Button variant="outline" size="sm" className="w-full" onClick={() => {}}>
+                          Add Feedback
+                        </Button>
+                      </>
+                    )}
+                    {interview.status === 'in_progress' && (
+                      <Link href={`/interview/${interview.id}`}>
+                        <Button variant="default" size="sm" className="w-full">
+                          Continue Interview
+                        </Button>
+                      </Link>
                     )}
                   </div>
                 </div>
