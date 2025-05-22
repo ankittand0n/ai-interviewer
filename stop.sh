@@ -1,16 +1,11 @@
 #!/bin/bash
 
-if [ -f .pid ]; then
-    PID=$(cat .pid)
-    if ps -p $PID > /dev/null; then
-        echo "Stopping application (PID: $PID)..."
-        kill $PID
-        rm .pid
-        echo "Application stopped"
-    else
-        echo "Process not found. Application may have already stopped."
-        rm .pid
-    fi
+# Kill process running on port 3000
+PID=$(lsof -t -i:3000)
+if [ -n "$PID" ]; then
+    echo "Stopping application on port 3000 (PID: $PID)..."
+    kill $PID
+    echo "Application stopped"
 else
-    echo "PID file not found. Application may not be running."
+    echo "No process found running on port 3000"
 fi 
