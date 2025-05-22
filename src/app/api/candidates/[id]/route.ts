@@ -69,4 +69,34 @@ export async function DELETE(
     console.error('Failed to delete candidate:', error)
     return NextResponse.json({ error: 'Failed to delete candidate' }, { status: 500 })
   }
+}
+
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const dataPath = path.join(process.cwd(), 'src/data')
+    const candidatesContent = await fs.readFile(path.join(dataPath, 'candidates.json'), 'utf8')
+    const candidatesData = JSON.parse(candidatesContent)
+
+    const candidate = candidatesData.candidates.find(
+      (c: Candidate) => c.id === params.id
+    )
+
+    if (!candidate) {
+      return NextResponse.json(
+        { error: 'Candidate not found' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json({ candidate })
+  } catch (error) {
+    console.error('Error loading candidate:', error)
+    return NextResponse.json(
+      { error: 'Failed to load candidate', details: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 }
+    )
+  }
 } 

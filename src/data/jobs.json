@@ -3,10 +3,17 @@
     {
       "id": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
       "title": "Java Developer L1",
+      "department": "Engineering",
+      "location": "Remote",
+      "experience": "3+ years",
+      "status": "active",
+      "createdAt": "2024-03-21T17:04:58.530Z",
+      "interviewsCompleted": 5,
+      "interviewsScheduled": 2,
       "description": "Key Responsibilities:\nDevelop, test, and maintain Java-based applications in accordance with established standards.\n\nTranslate software requirements into working and maintainable solutions.\n\nCollaborate with cross-functional teams (including front-end developers, QA engineers, and DevOps) to define, design, and ship new features.\n\nParticipate in code reviews, mentor junior developers, and enforce coding standards and best practices.\n\nTroubleshoot and resolve issues in existing software.\n\nWrite unit and integration tests to ensure software quality.\n\nOptimize application performance, scalability, and reliability.\n\nContinuously research and implement best practices, emerging technologies, and development tools.\n",
       "requirements": [
         "Required Qualifications:",
-        "Bachelor’s degree in Computer Science, Engineering, or a related field.",
+        "Bachelor's degree in Computer Science, Engineering, or a related field.",
         "3+ years of professional experience in Java development.",
         "Strong knowledge of Java (8 or later) and object-oriented programming principles.",
         "Experience with frameworks like Spring, Spring Boot, Hibernate, or similar.",
@@ -21,12 +28,18 @@
         "Experience with NoSQL databases (MongoDB, Cassandra).",
         "Familiarity with frontend technologies (Angular, React, or Vue.js) is a plus."
       ],
-      "createdAt": "2025-05-21T17:04:58.530Z",
-      "requirementsText": "\nRequired Qualifications:\nBachelor’s degree in Computer Science, Engineering, or a related field.\n\n3+ years of professional experience in Java development.\n\nStrong knowledge of Java (8 or later) and object-oriented programming principles.\n\nExperience with frameworks like Spring, Spring Boot, Hibernate, or similar.\n\nProficiency in RESTful APIs, microservices architecture, and multithreading concepts.\n\nFamiliarity with relational databases such as MySQL, PostgreSQL, or Oracle.\n\nWorking knowledge of version control tools (e.g., Git).\n\nUnderstanding of Agile methodologies (Scrum, Kanban).\n\nPreferred Qualifications:\nExperience with cloud platforms (AWS, Azure, GCP).\n\nExposure to containerization tools like Docker and orchestration tools like Kubernetes.\n\nKnowledge of CI/CD pipelines and tools like Jenkins, GitLab CI, or CircleCI.\n\nExperience with NoSQL databases (MongoDB, Cassandra).\n\nFamiliarity with frontend technologies (Angular, React, or Vue.js) is a plus."
+      "requirementsText": "\nRequired Qualifications:\nBachelor's degree in Computer Science, Engineering, or a related field.\n\n3+ years of professional experience in Java development.\n\nStrong knowledge of Java (8 or later) and object-oriented programming principles.\n\nExperience with frameworks like Spring, Spring Boot, Hibernate, or similar.\n\nProficiency in RESTful APIs, microservices architecture, and multithreading concepts.\n\nFamiliarity with relational databases such as MySQL, PostgreSQL, or Oracle.\n\nWorking knowledge of version control tools (e.g., Git).\n\nUnderstanding of Agile methodologies (Scrum, Kanban).\n\nPreferred Qualifications:\nExperience with cloud platforms (AWS, Azure, GCP).\n\nExposure to containerization tools like Docker and orchestration tools like Kubernetes.\n\nKnowledge of CI/CD pipelines and tools like Jenkins, GitLab CI, or CircleCI.\n\nExperience with NoSQL databases (MongoDB, Cassandra).\n\nFamiliarity with frontend technologies (Angular, React, or Vue.js) is a plus."
     },
     {
       "id": "024a575d-463d-48bb-8217-f1b5c7480da6",
       "title": "Project Manager",
+      "department": "Management",
+      "location": "Hybrid",
+      "experience": "5+ years",
+      "status": "active",
+      "createdAt": "2024-03-22T11:34:13.471Z",
+      "interviewsCompleted": 3,
+      "interviewsScheduled": 1,
       "description": "We are seeking a detail-oriented, organized, and strategic Project Manager to lead and coordinate projects from inception through to completion. The Project Manager will be responsible for planning, executing, and finalizing projects according to deadlines and within budget. This includes acquiring resources, coordinating efforts of team members, and ensuring project objectives are achieved.",
       "requirements": [
         "Define project scope, goals, and deliverables in collaboration with senior management and stakeholders.",
@@ -39,22 +52,37 @@
         "Report and escalate issues to management as needed.",
         "Foster communication among project stakeholders and team members.",
         "Create and maintain comprehensive project documentation.",
-        "Bachelor’s degree in Business Administration, Management, IT, Engineering, or a related field.",
+        "Bachelor's degree in Business Administration, Management, IT, Engineering, or a related field.",
         "3+ years of proven experience in project management.",
         "Project Management Professional (PMP) certification or equivalent preferred.",
         "Strong understanding of formal project management methodologies (Agile, Scrum, Waterfall, etc.).",
         "Proficient in project management software (e.g., MS Project, Jira, Asana, Trello).",
         "Excellent written and verbal communication skills.",
         "Strong leadership, organizational, and time-management skills.",
-        "Ability to manage multiple priorities in a fast-paced environment.",
-        "Preferred Skills:",
-        "Experience in [industry-specific experience, e.g., software development, construction, marketing, etc.].",
-        "Knowledge of budgeting, forecasting, and financial reporting.",
-        "Conflict resolution and problem-solving skills.",
-        "Change management experience."
+        "Ability to manage multiple priorities in a fast-paced environment."
       ],
-      "createdAt": "2025-05-22T11:34:13.471Z",
-      "requirementsText": "Define project scope, goals, and deliverables in collaboration with senior management and stakeholders.\nDevelop detailed project plans, schedules, and work breakdown structures.\nCoordinate internal resources and third-party vendors for the flawless execution of projects.\nTrack project performance, specifically to analyze the successful completion of short and long-term goals.\nManage changes to the project scope, schedule, and costs using appropriate verification techniques.\nIdentify and mitigate project risks and issues.\nEnsure resource availability and allocation.\nReport and escalate issues to management as needed.\nFoster communication among project stakeholders and team members.\nCreate and maintain comprehensive project documentation.\nBachelor’s degree in Business Administration, Management, IT, Engineering, or a related field.\n\n3+ years of proven experience in project management.\n\nProject Management Professional (PMP) certification or equivalent preferred.\n\nStrong understanding of formal project management methodologies (Agile, Scrum, Waterfall, etc.).\n\nProficient in project management software (e.g., MS Project, Jira, Asana, Trello).\n\nExcellent written and verbal communication skills.\n\nStrong leadership, organizational, and time-management skills.\n\nAbility to manage multiple priorities in a fast-paced environment.\n\nPreferred Skills:\nExperience in [industry-specific experience, e.g., software development, construction, marketing, etc.].\n\nKnowledge of budgeting, forecasting, and financial reporting.\n\nConflict resolution and problem-solving skills.\n\nChange management experience.\n"
+      "requirementsText": "Define project scope, goals, and deliverables in collaboration with senior management and stakeholders.\nDevelop detailed project plans, schedules, and work breakdown structures.\nCoordinate internal resources and third-party vendors for the flawless execution of projects.\nTrack project performance, specifically to analyze the successful completion of short and long-term goals.\nManage changes to the project scope, schedule, and costs using appropriate verification techniques.\nIdentify and mitigate project risks and issues.\nEnsure resource availability and allocation.\nReport and escalate issues to management as needed.\nFoster communication among project stakeholders and team members.\nCreate and maintain comprehensive project documentation.\nBachelor's degree in Business Administration, Management, IT, Engineering, or a related field.\n\n3+ years of proven experience in project management.\n\nProject Management Professional (PMP) certification or equivalent preferred.\n\nStrong understanding of formal project management methodologies (Agile, Scrum, Waterfall, etc.).\n\nProficient in project management software (e.g., MS Project, Jira, Asana, Trello).\n\nExcellent written and verbal communication skills.\n\nStrong leadership, organizational, and time-management skills.\n\nAbility to manage multiple priorities in a fast-paced environment.\n"
+    },
+    {
+      "id": "7c3b6f8d-9e2a-4c1d-b5f4-8a1e9b3d7e6c",
+      "title": "Senior UX Designer",
+      "department": "Design",
+      "location": "Remote",
+      "experience": "4+ years",
+      "status": "archived",
+      "createdAt": "2024-02-15T09:00:00Z",
+      "interviewsCompleted": 8,
+      "interviewsScheduled": 0,
+      "description": "We were looking for a Senior UX Designer to join our product team and help create exceptional user experiences. This position has been filled.",
+      "requirements": [
+        "4+ years of experience in UX design",
+        "Strong portfolio demonstrating user-centered design process",
+        "Experience with modern design tools (Figma, Sketch)",
+        "Proven track record of shipping successful products",
+        "Excellent communication and collaboration skills",
+        "Experience conducting user research and usability testing",
+        "Bachelor's degree in Design, HCI, or related field"
+      ]
     }
   ]
 }

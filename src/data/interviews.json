@@ -281,6 +281,36 @@
           "role": "system",
           "content": "Interview started. The AI interviewer will now begin the assessment.",
           "timestamp": "2025-05-22T13:43:33.001Z"
+        },
+        {
+          "role": "user",
+          "content": "hi",
+          "timestamp": "2025-05-22T14:53:47.284Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello! Welcome to the interview for the Project Manager position. I will be asking you questions to assess your fit for the role based on the job requirements. Are you ready to proceed?",
+          "timestamp": "2025-05-22T14:53:48.209Z"
+        },
+        {
+          "role": "user",
+          "content": "surfe",
+          "timestamp": "2025-05-22T14:53:59.738Z"
+        },
+        {
+          "role": "assistant",
+          "content": "It seems like there might have been a typo in your response. Could you please provide more information or clarify your previous message so we can continue with the interview for the Project Manager position? Thank you.",
+          "timestamp": "2025-05-22T14:54:00.625Z"
+        },
+        {
+          "role": "user",
+          "content": "sure",
+          "timestamp": "2025-05-22T14:54:03.922Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! Let's continue with the interview for the Project Manager position. I will now ask you a question related to the job requirements.\n\nCan you provide an example of a time when you successfully managed changes to a project scope, schedule, and costs using appropriate verification techniques? Please describe how you handled the situation and the outcome of your actions.",
+          "timestamp": "2025-05-22T14:54:04.987Z"
         }
       ],
       "createdAt": "2025-05-22T13:43:33.001Z"
@@ -439,6 +469,23 @@
       "createdAt": "2025-05-22T14:03:22.698Z",
       "score": 0,
       "feedback": "Interview ended with no responses from the candidate.\n\nFinal Score: 0/100\nQuestions Answered: 0/5 minimum required\n\nNote: Candidate did not provide any responses during the interview."
+    },
+    {
+      "id": "2cbfff8c-c22f-4822-ba4b-b99651a9cd4b",
+      "candidateId": "0c616661-6cfe-40d1-8f14-383edc05ddbb",
+      "candidateName": "Ankit Tandon",
+      "jobId": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
+      "jobTitle": "Java Developer L1",
+      "status": "scheduled",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Welcome to your technical interview for the Java Developer L1 position. I'll be your AI interviewer today.\n\nI'll be asking you questions about your technical experience and knowledge related to this role. Please:\n- Take your time to provide detailed answers\n- Feel free to ask for clarification if needed\n- Share specific examples from your experience\n- Be honest if you're not familiar with a topic",
+          "timestamp": "2025-05-22T14:54:59.544Z"
+        }
+      ],
+      "createdAt": "2025-05-22T14:54:59.544Z",
+      "updatedAt": "2025-05-22T14:54:59.544Z"
     }
   ]
 }

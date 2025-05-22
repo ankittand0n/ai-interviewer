@@ -1,59 +1,124 @@
 {
   "candidates": [
     {
-      "id": "ede3cfbc-4327-48b4-b0fd-7143668816b0",
+      "id": "c1b2d3e4-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
+      "name": "Ankit Kumar",
+      "email": "ankit.kumar@email.com",
+      "phone": "+1 (555) 123-4567",
+      "status": "active",
+      "appliedFor": "Java Developer L1",
+      "jobId": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
+      "experience": "4 years",
+      "currentRole": "Software Engineer",
+      "currentCompany": "Tech Solutions Inc.",
+      "location": "San Francisco, CA",
+      "createdAt": "2024-03-21T18:30:00.000Z",
+      "lastInterviewDate": "2024-03-25T14:00:00.000Z",
+      "interviewStage": "Technical Round",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "MySQL",
+        "Docker",
+        "AWS"
+      ],
+      "education": {
+        "degree": "B.S. Computer Science",
+        "university": "Stanford University",
+        "graduationYear": 2020
+      }
+    },
+    {
+      "id": "a9b8c7d6-e5f4-3g2h-1i0j-k9l8m7n6o5p4",
+      "name": "Ankit Shankar",
+      "email": "ankit.shankar@email.com",
+      "phone": "+1 (555) 987-6543",
+      "status": "active",
+      "appliedFor": "Project Manager",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "experience": "6 years",
+      "currentRole": "Senior Project Manager",
+      "currentCompany": "Global Tech Solutions",
+      "location": "New York, NY",
+      "createdAt": "2024-03-20T15:45:00.000Z",
+      "lastInterviewDate": "2024-03-24T11:30:00.000Z",
+      "interviewStage": "HR Round",
+      "skills": [
+        "Project Management",
+        "Agile",
+        "Scrum",
+        "JIRA",
+        "Risk Management"
+      ],
+      "education": {
+        "degree": "MBA",
+        "university": "Columbia University",
+        "graduationYear": 2018
+      }
+    },
+    {
+      "id": "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
+      "name": "Ankit Sharma",
+      "email": "ankit.sharma@email.com",
+      "phone": "+1 (555) 456-7890",
+      "status": "archived",
+      "appliedFor": "Senior UX Designer",
+      "jobId": "7c3b6f8d-9e2a-4c1d-b5f4-8a1e9b3d7e6c",
+      "experience": "5 years",
+      "currentRole": "UX Designer",
+      "currentCompany": "Creative Digital Agency",
+      "location": "Austin, TX",
+      "createdAt": "2024-02-18T10:15:00.000Z",
+      "lastInterviewDate": "2024-02-25T13:45:00.000Z",
+      "interviewStage": "Final Round",
+      "skills": [
+        "Figma",
+        "User Research",
+        "Prototyping",
+        "UI Design",
+        "Adobe Creative Suite"
+      ],
+      "education": {
+        "degree": "B.F.A. Design",
+        "university": "Rhode Island School of Design",
+        "graduationYear": 2019
+      }
+    },
+    {
+      "id": "0c616661-6cfe-40d1-8f14-383edc05ddbb",
       "name": "Ankit Tandon",
-      "email": "Ankit@gmail.com",
-      "phone": "8573900766",
-      "jobId": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
-      "resumeText": "yo",
-      "status": "interviewed",
-      "createdAt": "2025-05-21T17:04:34.138Z",
-      "interviewId": "824df6e2-8bd6-41ee-873f-010c9f2deff8"
-    },
-    {
-      "id": "3e07ccb7-cd13-4b9e-9494-1e1c292c237d",
-      "name": "Upated Ankit",
-      "email": "ankit@tand.on",
-      "phone": "8363727282",
-      "jobId": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
-      "resumeText": "Highly Experienced Java 8 Developer\nexperience in kubernetes\nexperience in docker\nexperience in spring boot\nexperience in junit ",
-      "status": "interviewed",
-      "createdAt": "2025-05-22T06:44:27.828Z",
-      "interviewId": "e4081c5b-75bc-46f3-962b-41cc7c0a16fc"
-    },
-    {
-      "id": "dfb2a888-c5f7-42d6-a48f-c65807cb8965",
-      "name": "Johnathan M. Carter",
-      "email": "john.carter@email.com",
-      "phone": "(555) 123-4567",
+      "email": "",
+      "phone": "",
+      "currentRole": "Java Developer",
+      "currentCompany": "Iris software",
+      "location": "",
+      "experience": "3+ years",
+      "skills": [
+        "Java (8 or later)",
+        "Object-oriented programming",
+        "Spring",
+        "Spring Boot",
+        "Hibernate",
+        "RESTful APIs",
+        "Microservices architecture",
+        "Multithreading",
+        "MySQL",
+        "PostgreSQL",
+        "Oracle",
+        "Git",
+        "Agile methodologies"
+      ],
+      "education": {
+        "degree": "Bachelor’s degree",
+        "university": "",
+        "graduationYear": ""
+      },
       "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
-      "resumeText": "Johnathan M. Carter\n📍 Dallas, TX | 📞 (555) 123-4567 | 📧 john.carter@email.com | 🔗 linkedin.com/in/johncarter-pm\n\nProfessional Summary\nSeasoned and results-driven Project Manager with over 15 years of experience successfully leading cross-functional teams in delivering complex, multi-million-dollar projects on time and within budget. Proven expertise in Agile, Waterfall, and hybrid methodologies, with a strong focus on stakeholder communication, risk management, and business process improvement. Known for a hands-on leadership style, strategic thinking, and ability to align project outcomes with organizational goals.\n\nCore Competencies\nProject Lifecycle Management\n\nBudgeting & Forecasting ($5M+ budgets)\n\nAgile/Scrum & Waterfall Methodologies\n\nStakeholder Communication\n\nRisk Assessment & Mitigation\n\nResource Allocation\n\nChange Management\n\nTeam Leadership & Development\n\nTools: MS Project, Jira, Asana, Trello, Confluence, Smartsheet\n\nProfessional Experience\nSenior Project Manager\nApex Solutions Group, Dallas, TX\nJanuary 2016 – Present\n\nLed 25+ enterprise-level projects with budgets ranging from $500K to $7M across IT infrastructure, software implementation, and digital transformation.\n\nSpearheaded Agile transformation for the IT department, reducing project delivery time by 30%.\n\nDirected a cross-functional team of 20+ including developers, analysts, QA, and vendors.\n\nImplemented a risk management framework that decreased project overruns by 40%.\n\nAchieved 95% client satisfaction score through transparent reporting and communication.\n\nProject Manager\nInnovent Technologies, Austin, TX\nJune 2010 – December 2015\n\nManaged concurrent software development and client onboarding projects for Fortune 500 clients.\n\nDelivered a CRM integration project 3 weeks ahead of schedule and 10% under budget.\n\nDeveloped project KPIs and dashboards, enhancing executive visibility into project health.\n\nFacilitated daily standups, sprint planning, and retrospectives in Agile teams.\n\nAssociate Project Manager\nTriTech Systems, Houston, TX\nMay 2008 – May 2010\n\nSupported senior PMs in planning and executing system upgrade projects.\n\nTracked schedules, budgets, and milestones, ensuring alignment with project goals.\n\nCoordinated communication between business units and technical teams.\n\nEducation\nBachelor of Science in Business Administration\nUniversity of Texas at Austin – Austin, TX\nGraduated: 2007\n\nCertifications\nProject Management Professional (PMP) – PMI\n\nCertified Scrum Master (CSM) – Scrum Alliance\n\nITIL Foundation – AXELOS (Optional if applicable)\n\nProfessional Affiliations\nMember, Project Management Institute (PMI)\n\nMember, Agile Alliance",
-      "status": "rejected",
-      "createdAt": "2025-05-22T13:42:26.247Z",
-      "interviewId": "1ad47001-667c-452a-9fde-29f83c8dc5c2"
-    },
-    {
-      "id": "15732f80-e5d3-4158-8395-0ed369ee6ab8",
-      "name": "a",
-      "email": "a",
-      "phone": "a",
-      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
-      "resumeText": "a",
-      "status": "interviewed",
-      "createdAt": "2025-05-22T14:00:05.946Z",
-      "interviewId": "3dc3d607-288e-464a-ba2e-b3182cb76d9b"
-    },
-    {
-      "id": "86056c0a-d86d-4362-80dd-4379de44df76",
-      "name": "b",
-      "email": "b",
-      "phone": "b",
-      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
-      "resumeText": "very experienced",
-      "status": "rejected",
-      "createdAt": "2025-05-22T14:03:15.322Z",
-      "interviewId": "4b68d15f-7179-417d-bfa1-32ba038db7fa"
+      "status": "active",
+      "interviewStage": "Screening",
+      "createdAt": "2025-05-22T14:40:38.374Z",
+      "resumeText": "Ankit Tandon\n\nJava Developer \nIris software\n\nBachelor’s degree in Computer Science, Engineering, or a related field.\n\n3+ years of professional experience in Java development.\n\nStrong knowledge of Java (8 or later) and object-oriented programming principles.\n\nExperience with frameworks like Spring, Spring Boot, Hibernate, or similar.\n\nProficiency in RESTful APIs, microservices architecture, and multithreading concepts.\n\nFamiliarity with relational databases such as MySQL, PostgreSQL, or Oracle.\n\nWorking knowledge of version control tools (e.g., Git).\n\nUnderstanding of Agile methodologies (Scrum, Kanban).\n\n",
+      "interviewScheduled": true
     }
   ]
 }

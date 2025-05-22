@@ -21,63 +21,71 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const { candidateId, jobId } = await request.json()
-    
-    // Load candidate and job data
-    const candidatesContent = await fs.readFile(path.join(process.cwd(), 'src/data/candidates.json'), 'utf8')
-    const jobsContent = await fs.readFile(path.join(process.cwd(), 'src/data/jobs.json'), 'utf8')
-    const candidatesData = JSON.parse(candidatesContent)
-    const jobsData = JSON.parse(jobsContent)
-    
-    const candidate = candidatesData.candidates.find((c: Candidate) => c.id === candidateId)
-    const job = jobsData.jobs.find((j: JobDescription) => j.id === jobId)
 
-    if (!candidate || !job) {
-      return NextResponse.json({ error: 'Candidate or job not found' }, { status: 404 })
+    // Read the current interviews data
+    const interviewsContent = await fs.readFile(dataPath, 'utf8')
+    const interviewsData = JSON.parse(interviewsContent)
+
+    // Read candidates data to get candidate details
+    const candidatesPath = path.join(process.cwd(), 'src/data/candidates.json')
+    const candidatesContent = await fs.readFile(candidatesPath, 'utf8')
+    const candidatesData = JSON.parse(candidatesContent)
+
+    const candidate = candidatesData.candidates.find((c: any) => c.id === candidateId)
+    if (!candidate) {
+      return NextResponse.json({ error: 'Candidate not found' }, { status: 404 })
     }
 
-    // Create initial system message with interview context
-    const systemMessage: ChatMessage = {
-      role: 'system',
-      content: `Welcome to your technical interview for the ${job.title} position. I'll be your AI interviewer today.
+    // Get job details
+    const jobsPath = path.join(process.cwd(), 'src/data/jobs.json')
+    const jobsContent = await fs.readFile(jobsPath, 'utf8')
+    const jobsData = JSON.parse(jobsContent)
+    const job = jobsData.jobs.find((j: any) => j.id === jobId)
+
+    if (!job) {
+      return NextResponse.json({ error: 'Job not found' }, { status: 404 })
+    }
+
+    // Create new interview
+    const newInterview = {
+      id: uuidv4(),
+      candidateId,
+      candidateName: candidate.name,
+      jobId,
+      jobTitle: job.title,
+      status: 'scheduled',
+      messages: [
+        {
+          role: 'system',
+          content: `Welcome to your technical interview for the ${job.title} position. I'll be your AI interviewer today.
 
 I'll be asking you questions about your technical experience and knowledge related to this role. Please:
 - Take your time to provide detailed answers
 - Feel free to ask for clarification if needed
 - Share specific examples from your experience
 - Be honest if you're not familiar with a topic`,
-      timestamp: new Date().toISOString(),
-    }
-
-    // Create initial AI message
-    const aiMessage: ChatMessage = {
-      role: 'assistant',
-      content: `Hello! I'll be conducting your technical interview for the ${job.title} position today. Let's start by having you tell me about your relevant experience and what interests you about this role.`,
-      timestamp: new Date().toISOString(),
-    }
-
-    // Create new interview
-    const interview: Interview = {
-      id: uuidv4(),
-      candidateId,
-      jobId,
-      status: 'in_progress',
-      messages: [systemMessage, aiMessage],
+          timestamp: new Date().toISOString()
+        }
+      ],
       createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }
 
-    // Update candidate with interview ID
-    candidate.interviewId = interview.id
-    await fs.writeFile(path.join(process.cwd(), 'src/data/candidates.json'), JSON.stringify(candidatesData, null, 2))
+    interviewsData.interviews.push(newInterview)
 
-    // Save interview
-    const interviewsContent = await fs.readFile(dataPath, 'utf8')
-    const interviewsData = JSON.parse(interviewsContent)
-    interviewsData.interviews.push(interview)
+    // Update candidate's interview status
+    candidate.interviewScheduled = true
+    await fs.writeFile(candidatesPath, JSON.stringify(candidatesData, null, 2))
+
+    // Save updated interviews data
     await fs.writeFile(dataPath, JSON.stringify(interviewsData, null, 2))
 
-    return NextResponse.json({ success: true, interview })
+    return NextResponse.json(newInterview)
   } catch (error) {
-    console.error('Failed to create interview:', error)
-    return NextResponse.json({ error: 'Failed to create interview' }, { status: 500 })
+    console.error('Error creating interview:', error)
+    return NextResponse.json(
+      { error: 'Failed to create interview', details: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 }
+    )
   }
 } 

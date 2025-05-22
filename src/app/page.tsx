@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -10,15 +10,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import users from '@/data/users.json'
+import { useAuth } from '@/contexts/AuthContext'
 
 const formSchema = z.object({
   username: z.string().min(1, 'Username is required'),
   password: z.string().min(1, 'Password is required'),
 })
 
-export default function Home() {
+export default function LoginPage() {
   const router = useRouter()
   const [error, setError] = useState('')
+  const { login } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,9 +36,7 @@ export default function Home() {
     )
 
     if (user) {
-      // Store user session
-      sessionStorage.setItem('user', JSON.stringify(user))
-      // Redirect to dashboard
+      login(user)
       router.push('/dashboard')
     } else {
       setError('Invalid username or password')
@@ -44,11 +44,10 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Card className="w-[350px]">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <Card className="w-[400px]">
         <CardHeader>
-          <CardTitle>HR Login</CardTitle>
-          <CardDescription>Sign in to manage job postings and candidates</CardDescription>
+          <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -60,7 +59,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your username" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -73,20 +72,22 @@ export default function Home() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Enter your password" {...field} />
+                      <Input type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && (
+                <div className="text-sm text-red-500 text-center">{error}</div>
+              )}
               <Button type="submit" className="w-full">
-                Sign In
+                Login
               </Button>
             </form>
           </Form>
         </CardContent>
       </Card>
-      </main>
+    </div>
   )
 }
