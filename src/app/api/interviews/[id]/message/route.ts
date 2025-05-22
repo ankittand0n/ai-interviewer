@@ -13,7 +13,7 @@ export async function POST(
 ) {
   const { id } = await context.params
   try {
-    const { message } = await request.json()
+    const { message, elapsedTime } = await request.json()
 
     // Load all necessary data
     const interviewsContent = await fs.readFile(path.join(dataPath, 'interviews.json'), 'utf8')
@@ -32,9 +32,10 @@ export async function POST(
     const job = jobsData.jobs.find((j: JobDescription) => j.id === interview.jobId)
     const candidate = candidatesData.candidates.find((c: Candidate) => c.id === interview.candidateId)
 
-    // Check if interview should be completed based on time
-    const startTime = new Date(interview.createdAt).getTime()
-    const elapsedTime = Date.now() - startTime
+    // Update elapsed time
+    interview.elapsedTime = elapsedTime
+
+    // Check if interview should be completed based on elapsed time
     if (elapsedTime >= INTERVIEW_DURATION) {
       interview.status = 'completed'
       

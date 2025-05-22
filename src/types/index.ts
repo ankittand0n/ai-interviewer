@@ -33,6 +33,7 @@ export interface Interview {
   score?: number;
   feedback?: string;
   createdAt: string;
+  elapsedTime?: number;
 }
 
 export interface ChatMessage {
