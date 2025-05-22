@@ -12,17 +12,6 @@
       "interviewId": "824df6e2-8bd6-41ee-873f-010c9f2deff8"
     },
     {
-      "id": "bb8d2507-7fd6-4335-be83-2e67afab45a2",
-      "name": "New Ankit",
-      "email": "ankit@tandon.com",
-      "phone": "234234234",
-      "jobId": "026d69c4-0c13-4b31-b617-fe8caa3c1dd3",
-      "resumeText": "Very Very Experienced Java and Kubernetes developer with docker",
-      "status": "interviewed",
-      "createdAt": "2025-05-22T05:26:44.974Z",
-      "interviewId": "69c7c01c-e88d-434e-ba43-e1749039dbc4"
-    },
-    {
       "id": "3e07ccb7-cd13-4b9e-9494-1e1c292c237d",
       "name": "Upated Ankit",
       "email": "ankit@tand.on",
@@ -32,6 +21,17 @@
       "status": "interviewed",
       "createdAt": "2025-05-22T06:44:27.828Z",
       "interviewId": "e4081c5b-75bc-46f3-962b-41cc7c0a16fc"
+    },
+    {
+      "id": "00e3e2e3-8b8e-4370-9651-145361eb0e8a",
+      "name": "Project Manager 1",
+      "email": "manager@my-awesome-company.com",
+      "phone": "4928347927423",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "resumeText": "Johnathan M. Carter\n📍 Dallas, TX | 📞 (555) 123-4567 | 📧 john.carter@email.com | 🔗 linkedin.com/in/johncarter-pm\n\nProfessional Summary\nSeasoned and results-driven Project Manager with over 15 years of experience successfully leading cross-functional teams in delivering complex, multi-million-dollar projects on time and within budget. Proven expertise in Agile, Waterfall, and hybrid methodologies, with a strong focus on stakeholder communication, risk management, and business process improvement. Known for a hands-on leadership style, strategic thinking, and ability to align project outcomes with organizational goals.\n\nCore Competencies\nProject Lifecycle Management\n\nBudgeting & Forecasting ($5M+ budgets)\n\nAgile/Scrum & Waterfall Methodologies\n\nStakeholder Communication\n\nRisk Assessment & Mitigation\n\nResource Allocation\n\nChange Management\n\nTeam Leadership & Development\n\nTools: MS Project, Jira, Asana, Trello, Confluence, Smartsheet\n\nProfessional Experience\nSenior Project Manager\nApex Solutions Group, Dallas, TX\nJanuary 2016 – Present\n\nLed 25+ enterprise-level projects with budgets ranging from $500K to $7M across IT infrastructure, software implementation, and digital transformation.\n\nSpearheaded Agile transformation for the IT department, reducing project delivery time by 30%.\n\nDirected a cross-functional team of 20+ including developers, analysts, QA, and vendors.\n\nImplemented a risk management framework that decreased project overruns by 40%.\n\nAchieved 95% client satisfaction score through transparent reporting and communication.\n\nProject Manager\nInnovent Technologies, Austin, TX\nJune 2010 – December 2015\n\nManaged concurrent software development and client onboarding projects for Fortune 500 clients.\n\nDelivered a CRM integration project 3 weeks ahead of schedule and 10% under budget.\n\nDeveloped project KPIs and dashboards, enhancing executive visibility into project health.\n\nFacilitated daily standups, sprint planning, and retrospectives in Agile teams.\n\nAssociate Project Manager\nTriTech Systems, Houston, TX\nMay 2008 – May 2010\n\nSupported senior PMs in planning and executing system upgrade projects.\n\nTracked schedules, budgets, and milestones, ensuring alignment with project goals.\n\nCoordinated communication between business units and technical teams.\n\nEducation\nBachelor of Science in Business Administration\nUniversity of Texas at Austin – Austin, TX\nGraduated: 2007\n\nCertifications\nProject Management Professional (PMP) – PMI\n\nCertified Scrum Master (CSM) – Scrum Alliance\n\nITIL Foundation – AXELOS (Optional if applicable)\n\nProfessional Affiliations\nMember, Project Management Institute (PMI)\n\nMember, Agile Alliance",
+      "status": "pending",
+      "createdAt": "2025-05-22T11:36:32.079Z",
+      "interviewId": "6fb9b650-e82e-48f5-9774-e2070841620a"
     }
   ]
 }

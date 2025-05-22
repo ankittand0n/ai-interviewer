@@ -225,6 +225,30 @@
       "createdAt": "2025-05-22T07:14:28.372Z",
       "score": 75,
       "feedback": "Strengths Demonstrated:\n1. **Technical Knowledge**: The candidate has a strong foundation in Java 8 and its features, such as the Stream API and lambda expressions. They effectively communicated their understanding of the advantages of using these features, such as improved efficiency and code readability.\n2. **Experience with Spring Boot**: The candidate demonstrated familiarity with Spring Boot, particularly in creating REST APIs using relevant annotations. This shows a good grasp of fundamental concepts critical for developing and maintaining microservices.\n\nAreas for Improvement:\n1. **Depth of Explanation**: While the candidate mentioned using the Stream API and Spring Boot annotations, they could provide more in-depth examples of how these tools were applied in complex scenarios. For instance, elaborating on specific challenges faced and how they were overcome would demonstrate a deeper problem-solving capability.\n2. **Microservices Integration**: The candidate could enhance their explanation of integrating multiple microservices. Discussing aspects like service discovery, communication patterns, or specific challenges faced during integration could provide a more comprehensive view of their experience.\n3. **Communication Skills**: The candidate's communication was generally clear but could be more structured. Offering more detailed, step-by-step explanations in responses would improve clarity and demonstrate a higher level of technical and problem-solving acumen.\n\nTechnical Competency Assessment:\n- The candidate has a solid understanding of Java 8 features and Spring Boot for REST API development. However, there is room to expand on their knowledge of integrating and managing microservices, especially in areas like service discovery, inter-service communication, and error handling.\n\nRecommendations:\n- Encourage the candidate to delve deeper into complex scenarios they have encountered and articulate how they navigated these challenges.\n- Suggest further exploration and practice in areas such as Kubernetes and Docker, as these are critical skills for the role.\n- Recommend improving communication by structuring responses more clearly and providing detailed examples to showcase problem-solving abilities comprehensively.\n\nOverall, the candidate shows potential for the role but would benefit from deepening their technical explanations and enhancing communication skills to convey their problem-solving processes more effectively."
+    },
+    {
+      "id": "6fb9b650-e82e-48f5-9774-e2070841620a",
+      "candidateId": "00e3e2e3-8b8e-4370-9651-145361eb0e8a",
+      "jobId": "024a575d-463d-48bb-8217-f1b5c7480da6",
+      "status": "in_progress",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Interview started. The AI interviewer will now begin the assessment.",
+          "timestamp": "2025-05-22T11:37:04.259Z"
+        },
+        {
+          "role": "user",
+          "content": "hi",
+          "timestamp": "2025-05-22T11:37:11.432Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Hello, Johnathan. Thank you for joining us today. Let's dive right into the interview. From your impressive background, it seems like you've had significant experience with both Agile and Waterfall methodologies. Could you provide an example of a project where you had to decide between using Agile or Waterfall? What factors did you consider in making that decision?",
+          "timestamp": "2025-05-22T11:37:11.632Z"
+        }
+      ],
+      "createdAt": "2025-05-22T11:37:04.259Z"
     }
   ]
 }
