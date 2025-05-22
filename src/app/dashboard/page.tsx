@@ -32,7 +32,7 @@ export default function Dashboard() {
   })
   const [editingJob, setEditingJob] = useState<(JobDescription & { requirementsText: string }) | null>(null)
   const [editingCandidate, setEditingCandidate] = useState<Candidate | null>(null)
-  const [deleteConfirmation, setDeleteConfirmation] = useState<{ type: 'job' | 'candidate'; id: string } | null>(null)
+  const [deleteConfirmation, setDeleteConfirmation] = useState<{ type: 'job' | 'candidate' | 'interview'; id: string } | null>(null)
 
   const refreshData = useCallback(async () => {
     try {
@@ -202,6 +202,27 @@ export default function Dashboard() {
     } catch (error) {
       console.error('Failed to delete candidate:', error)
       toast.error('Failed to delete candidate')
+    }
+  }
+
+  const handleDeleteInterview = async (id: string) => {
+    try {
+      const response = await fetch(`/api/interviews/${id}`, {
+        method: 'DELETE',
+      })
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        toast.error(errorData.error || 'Failed to delete interview')
+        return
+      }
+      
+      await response.json()
+      toast.success('Interview deleted successfully')
+      refreshData()
+    } catch (error) {
+      console.error('Failed to delete interview:', error)
+      toast.error('Failed to delete interview')
     }
   }
 
@@ -457,11 +478,11 @@ export default function Dashboard() {
                         <DialogTrigger asChild>
                           <Button variant="outline">View Resume</Button>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className="max-h-[80vh] overflow-hidden flex flex-col">
                           <DialogHeader>
                             <DialogTitle>Resume - {candidate.name}</DialogTitle>
                           </DialogHeader>
-                          <div className="mt-4">
+                          <div className="mt-4 overflow-y-auto flex-grow pr-2">
                             <p className="whitespace-pre-wrap">{candidate.resumeText}</p>
                           </div>
                         </DialogContent>
@@ -475,15 +496,25 @@ export default function Dashboard() {
                               View Interview Results
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-3xl">
+                          <DialogContent className="max-h-[80vh] overflow-hidden flex flex-col">
                             <DialogHeader>
                               <DialogTitle>Interview Results - {candidate.name}</DialogTitle>
                             </DialogHeader>
-                            <div className="mt-4">
+                            <div className="mt-4 overflow-y-auto flex-grow pr-2">
                               {interviews.find((i: Interview) => i.id === candidate.interviewId && i.status === 'completed') ? (
-                                <InterviewRating 
-                                  interview={interviews.find((i: Interview) => i.id === candidate.interviewId)!} 
-                                />
+                                <>
+                                  <InterviewRating 
+                                    interview={interviews.find((i: Interview) => i.id === candidate.interviewId)!} 
+                                  />
+                                  <div className="mt-4 flex justify-end">
+                                    <Button
+                                      variant="destructive"
+                                      onClick={() => setDeleteConfirmation({ type: 'interview', id: candidate.interviewId! })}
+                                    >
+                                      Delete Interview
+                                    </Button>
+                                  </div>
+                                </>
                               ) : (
                                 <p>Interview is still in progress.</p>
                               )}
@@ -491,6 +522,36 @@ export default function Dashboard() {
                           </DialogContent>
                         </Dialog>
                       )}
+
+                      {/* View Job Description Dialog */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" className="ml-2">View Job Description</Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-h-[80vh] overflow-hidden flex flex-col">
+                          <DialogHeader>
+                            <DialogTitle>Job Description - {jobs.find(j => j.id === candidate.jobId)?.title}</DialogTitle>
+                          </DialogHeader>
+                          <div className="mt-4 overflow-y-auto flex-grow pr-2">
+                            <div className="space-y-4">
+                              <div>
+                                <h3 className="font-semibold mb-2">Description:</h3>
+                                <p className="whitespace-pre-wrap">
+                                  {jobs.find(j => j.id === candidate.jobId)?.description}
+                                </p>
+                              </div>
+                              <div>
+                                <h3 className="font-semibold mb-2">Requirements:</h3>
+                                <ul className="list-disc pl-5">
+                                  {jobs.find(j => j.id === candidate.jobId)?.requirements.map((req, i) => (
+                                    <li key={i}>{req}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
 
                       <Button
                         onClick={async () => {
@@ -546,6 +607,8 @@ export default function Dashboard() {
                   handleDeleteJob(deleteConfirmation.id)
                 } else if (deleteConfirmation?.type === 'candidate') {
                   handleDeleteCandidate(deleteConfirmation.id)
+                } else if (deleteConfirmation?.type === 'interview') {
+                  handleDeleteInterview(deleteConfirmation.id)
                 }
               }}
             >

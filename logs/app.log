@@ -1,10 +1,11 @@
 
-> interviewer@0.1.0 start /root/ai-interviewer
+> interviewer@0.1.0 start C:\Development\interviewer
 > next start
 
    ▲ Next.js 15.3.2
    - Local:        http://localhost:3000
-   - Network:      http://159.65.159.94:3000
+   - Network:      http://192.168.1.8:3000
 
  ✓ Starting...
- ✓ Ready in 743ms
+ ✓ Ready in 5.6s
+ ELIFECYCLE  Command failed with exit code 143.

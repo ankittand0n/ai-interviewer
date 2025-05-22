@@ -33,4 +33,49 @@ export async function GET(
     console.error('Failed to fetch interview:', error)
     return NextResponse.json({ error: 'Failed to fetch interview' }, { status: 500 })
   }
+}
+
+export async function DELETE(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params
+  try {
+    const fileContent = await fs.readFile(dataPath, 'utf8')
+    const data = JSON.parse(fileContent)
+    
+    const interviewIndex = data.interviews.findIndex((i: Interview) => i.id === id)
+    if (interviewIndex === -1) {
+      return NextResponse.json({ error: 'Interview not found' }, { status: 404 })
+    }
+
+    // Check if interview is in progress
+    const interview = data.interviews[interviewIndex]
+    if (interview.status === 'in_progress') {
+      return NextResponse.json(
+        { error: 'Cannot delete an interview that is in progress' },
+        { status: 400 }
+      )
+    }
+
+    // Remove interview ID from candidate
+    const candidatesPath = path.join(process.cwd(), 'src/data/candidates.json')
+    const candidatesContent = await fs.readFile(candidatesPath, 'utf8')
+    const candidatesData = JSON.parse(candidatesContent)
+    
+    const candidate = candidatesData.candidates.find((c: Candidate) => c.id === interview.candidateId)
+    if (candidate && candidate.interviewId === id) {
+      delete candidate.interviewId
+      await fs.writeFile(candidatesPath, JSON.stringify(candidatesData, null, 2))
+    }
+
+    // Delete the interview
+    data.interviews.splice(interviewIndex, 1)
+    await fs.writeFile(dataPath, JSON.stringify(data, null, 2))
+    
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Failed to delete interview:', error)
+    return NextResponse.json({ error: 'Failed to delete interview' }, { status: 500 })
+  }
 } 
